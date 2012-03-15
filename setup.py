@@ -11,14 +11,15 @@ setup(
     version = "0.0",
     author = "Vasily Stepanov",
     author_email = "vasily.stepanov@gmail.com",
-    description = ("An demonstration of how to create, document, and publish "
-                                   "to the cheese shop a5 pypi.org."),
+    description = "Generic code generator from WebIDL interfaces.",
+    install_requires = ['ply'],
+    setup_requires = ['ply'],
     license = "MIT",
     keywords = "webidl",
     url = "https://github.com/VasilyStepanov/pywidl",
-    packages=['pywidl', 'tests'],
-    long_description=read('README'),
-    classifiers=[
+    packages = ['pywidl', 'tests'],
+    long_description = read('README'),
+    classifiers = [
         "Development Status :: 1 - Planning",
         "Topic :: Software Development :: Code Generators",
         "License :: OSI Approved :: MIT License",
