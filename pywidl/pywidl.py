@@ -32,7 +32,7 @@ class App(object):
     return self._source
 
 
-  def _emit(self, definitions):
+  def _emitMako(self, definitions):
     template = Template(filename=self._template)
     with open(self._output, 'w') as f:
       f.write(template.render(
@@ -41,6 +41,13 @@ class App(object):
         output=self._output,
         template=self._template,
         template_type=self._template_type))
+
+  
+  def _emit(self, definitions):
+    if self._template_type == self.MAKO_TEMPLATE:
+      self._emitMako(definitions)
+    else:
+      raise ValueError("Unknown template type: %d" % self._template_type)
 
 
   def run(self):
