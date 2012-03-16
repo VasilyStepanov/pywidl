@@ -3,11 +3,22 @@
 
 import os
 from setuptools import setup
+from distutils.command.build_py import build_py
+
+class build_py_with_ply(build_py):
+  def run(self, *args, **kwargs):
+    import pywidl.lexer
+    import pywidl.parser
+    build_py.run(self, *args, **kwargs)
 
 def read(fname):
   return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+
+
 setup(
+  cmdclass = { 'build_py' : build_py_with_ply },
+
   name = "pywidl",
   version = "0.0",
   author = "Vasily Stepanov",

@@ -4,13 +4,16 @@ from lexer import tokens
 
 import ply.yacc as yacc
 
+import os
+
 def p_Definitions(p):
   "Definitions : identifier whitespace integer whitespace"
   p[0] = [p[1]] + [p[3]]
 
 
 
-parser = yacc.yacc()
+parsedir = os.path.dirname(__file__)
+parser = yacc.yacc(outputdir=parsedir, debug=0)
 
 
 

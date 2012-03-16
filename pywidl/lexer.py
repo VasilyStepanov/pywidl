@@ -2,6 +2,8 @@
 
 import ply.lex as lex
 
+import os
+
 
 
 tokens = (
@@ -20,4 +22,5 @@ t_whitespace = r"[\t\n\r ]+|[\t\n\r ]*((//.*|/\*.*?\*/)[\t\n\r ]*)+"
 
 
 
-lex.lex()
+lexdir = os.path.dirname(__file__)
+lex.lex(outputdir=lexdir)
