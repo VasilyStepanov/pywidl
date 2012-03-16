@@ -25,8 +25,9 @@ setup(
     "License :: OSI Approved :: MIT License",
   ],
   test_suite = "tests.test_suite",
-  entry_points = """
-    [console_scripts]
-      pywidl = pywidl.pywidl:main
-  """
+  entry_points = {
+    "console_scripts" : [
+      "pywidl = pywidl.pywidl:main"
+    ],
+  },
 )
