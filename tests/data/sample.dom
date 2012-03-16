@@ -1,4 +1,4 @@
-definitions: tests/data/sample.idl
+definitions: []
 source: tests/data/sample.idl
 output: tests/received.dom
 template: tests/templates/dom.mako

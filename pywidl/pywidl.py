@@ -29,7 +29,7 @@ class App(object):
 
   
   def _parse(self):
-    return self._source
+    return []
 
 
   def _emitMako(self, definitions):
