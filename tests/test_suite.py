@@ -1,12 +1,18 @@
 #!/usr/bin/python
 
+from pywidl.pywidl import App
 import unittest
+import os.path
 
 
 
-class TestExample(unittest.TestCase):
+class TestPyWIdl(unittest.TestCase):
   def test_basics(self):
-    pass
+    app = App(
+      os.path.join("tests", "data", "sample.idl"),
+      os.path.join("tests", "received.dom"),
+      os.path.join("tests", "templates", "dom.mako"))
+    app.run()
 
 
 

@@ -2,6 +2,9 @@
 # -*- coding: UTF-8 -*-
 
 import sys
+from mako.template import Template
+
+
 
 def printUsage():
   print """USAGE: pywidl <options> source
@@ -18,7 +21,7 @@ class App(object):
   MAKO_TEMPLATE = 0
 
 
-  def __init__(self, source, output, template, template_type):
+  def __init__(self, source, output, template, template_type=MAKO_TEMPLATE):
     self._source = source
     self._output = output
     self._template = template
@@ -26,7 +29,9 @@ class App(object):
 
 
   def run(self):
-    print "hello world"
+    template = Template(filename=self._template)
+    with open(self._output, 'w') as f:
+      f.write(template.render())
 
 
 

@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
 import os
@@ -12,13 +13,13 @@ setup(
   author = "Vasily Stepanov",
   author_email = "vasily.stepanov@gmail.com",
   description = "Generic code generator from WebIDL interfaces.",
-  install_requires = ['ply>=3.4'],
-  setup_requires = ['ply>=3.4'],
+  install_requires = ["ply>=3.4", "mako>=0.5"],
+  setup_requires = ["ply>=3.4"],
   license = "MIT",
   keywords = "webidl",
   url = "https://github.com/VasilyStepanov/pywidl",
-  packages = ['pywidl', 'tests'],
-  long_description = read('README'),
+  packages = ["pywidl", "tests"],
+  long_description = read("README"),
   classifiers = [
     "Development Status :: 1 - Planning",
     "Topic :: Software Development :: Code Generators",
