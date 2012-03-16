@@ -1,1 +1,3 @@
 build/
+dist/
+pywidl.egg-info/
