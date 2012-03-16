@@ -24,4 +24,8 @@ setup(
         "Topic :: Software Development :: Code Generators",
         "License :: OSI Approved :: MIT License",
     ],
+    entry_points = """
+        [console_scripts]
+            foo = pywidl:foo
+    """
 )
