@@ -1,9 +1,11 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-import sys
+from parser import parse
+
 from mako.template import Template
 
+import sys
 
 
 def printUsage():
@@ -29,7 +31,8 @@ class App(object):
 
   
   def _parse(self):
-    return []
+    with open(self._source, 'r') as f:
+      return parse(f.read())
 
 
   def _emitMako(self, definitions):

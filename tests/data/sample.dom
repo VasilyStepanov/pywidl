@@ -3,4 +3,4 @@ output: tests/received.dom
 template: tests/templates/dom.mako
 template_type: 0
 
-definitions: []
+definitions: ['ident', '123']
