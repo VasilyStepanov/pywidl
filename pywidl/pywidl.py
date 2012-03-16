@@ -27,11 +27,25 @@ class App(object):
     self._template = template
     self._template_type = template_type
 
+  
+  def _parse(self):
+    return self._source
 
-  def run(self):
+
+  def _emit(self, definitions):
     template = Template(filename=self._template)
     with open(self._output, 'w') as f:
-      f.write(template.render())
+      f.write(template.render(
+        definitions=definitions,
+        source=self._source,
+        output=self._output,
+        template=self._template,
+        template_type=self._template_type))
+
+
+  def run(self):
+    definitions = self._parse()
+    self._emit(definitions)
 
 
 
