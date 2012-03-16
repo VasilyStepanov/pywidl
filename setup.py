@@ -26,6 +26,6 @@ setup(
   ],
   entry_points = """
     [console_scripts]
-      foo = pywidl:foo
+      pywidl = pywidl.pywidl:main
   """
 )
