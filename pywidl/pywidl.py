@@ -4,13 +4,13 @@
 import sys
 
 def printUsage():
-  print "USAGE: pywidl <options> source"
-  print
-  print "  Options:"
-  print "    -m, --mako"
-  print "    -o, --output FILE"
-  print "    -t, --template FILE"
-  print
+  print """USAGE: pywidl <options> source
+
+  Options:
+    -m, --mako
+    -o, --output FILE
+    -t, --template FILE
+"""
 
 
 
