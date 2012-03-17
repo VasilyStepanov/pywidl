@@ -22,5 +22,11 @@ t_whitespace = r"[\t\n\r ]+|[\t\n\r ]*((//.*|/\*.*?\*/)[\t\n\r ]*)+"
 
 
 
+def t_error(t):
+  print "Illegal character '%s'" % t.value[0]
+  t.lexer.skip(1)
+
+
+
 lexdir = os.path.dirname(__file__)
-lex.lex(outputdir=lexdir)
+lex.lex(lextab="pywidl.lextab", outputdir=lexdir, optimize=1)
