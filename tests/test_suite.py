@@ -5,7 +5,7 @@ from pywidl.pywidl import App
 import unittest
 
 from difflib import context_diff
-import os.path
+import os
 import sys
 
 
@@ -20,6 +20,9 @@ class TestPyWIdl(unittest.TestCase):
       if diff_clean: print
       diff_clean = False
       sys.stdout.write(line)
+
+    if diff_clean:
+      os.remove(tofile)
 
     return diff_clean
 
