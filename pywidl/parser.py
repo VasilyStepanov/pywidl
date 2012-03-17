@@ -6,6 +6,8 @@ import ply.yacc as yacc
 
 import os
 
+
+
 def p_Definitions(p):
   "Definitions : identifier whitespace integer whitespace"
   p[0] = [p[1]] + [p[3]]
@@ -13,7 +15,7 @@ def p_Definitions(p):
 
 
 parsedir = os.path.dirname(__file__)
-parser = yacc.yacc(outputdir=parsedir, debug=0)
+parser = yacc.yacc(tabmodule="pywidl.parsetab", outputdir=parsedir, debug=1)
 
 
 
