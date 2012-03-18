@@ -33,7 +33,7 @@ class TestPyWIdl(unittest.TestCase):
     rcv = os.path.join("tests", "received.dom")
 
     app = App(src, rcv,
-      os.path.join("tests", "templates", "dom.mako"))
+      os.path.join("tests", "templates", "dom.tpl"))
     app.run()
 
     self.assertTrue(self._match(eta, rcv))

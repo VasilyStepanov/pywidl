@@ -3,7 +3,7 @@
 
 source: tests/data/sample.idl
 output: tests/received.dom
-template: tests/templates/dom.mako
+template: tests/templates/dom.tpl
 template_type: 0
 
 
@@ -16,12 +16,12 @@ interface Paint { };
 
 
 
-interface SolidColor { };
+interface SolidColor : Paint { };
 
 
 
 
-interface Pattern { };
+interface Pattern : Paint { };
 
 
 

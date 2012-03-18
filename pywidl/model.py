@@ -10,5 +10,6 @@ class Definition(object):
 
 
 class Interface(Definition):
-  def __init__(self, name):
+  def __init__(self, name, parent):
     super(Interface, self).__init__(name)
+    self.parent = parent

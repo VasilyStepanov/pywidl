@@ -62,7 +62,7 @@ def p_CallbackRestOrInterface(p):
 def p_Interface(p):
   """Interface : interface IDENTIFIER Inheritance "{" InterfaceMembers "}" ";"
   """
-  p[0] = model.Interface(p[2])
+  p[0] = model.Interface(p[2], p[3])
 
 
 
@@ -155,9 +155,14 @@ def p_ExceptionMembers(p):
 
 # 16
 def p_Inheritance(p):
-  """Inheritance : ":" IDENTIFIER
-                 |
-  """
+  """Inheritance : ":" IDENTIFIER"""
+  p[0] = p[2]
+
+
+
+def p_Inheritance_empty(p):
+  """Inheritance :"""
+  p[0] = None
 
 
 

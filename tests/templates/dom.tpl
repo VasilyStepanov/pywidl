@@ -2,7 +2,12 @@
   import pywidl
 %>
 <%def name="emitInterface(interface)">
-interface ${interface.name} { };
+<%
+  if interface.parent:
+    declaration = "%s : %s" % (interface.name, interface.parent)
+  else:
+    declaration = "%s" % interface.name
+%>interface ${declaration} { };
 </%def>
 <%def name="emitDefinition(definition)">
 % if isinstance(definition, pywidl.Interface):
