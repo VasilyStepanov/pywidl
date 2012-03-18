@@ -88,6 +88,12 @@ def t_IDENTIFIER(t):
 
 
 
+def t_block_comment(t):
+  r"\/\*[^*]*\*+([^/*][^*]*\*+)*\/"
+  t.lexer.lineno += t.value.count('\n')
+
+
+
 def t_newline(t):
   r"\n"
   t.lexer.lineno += 1
