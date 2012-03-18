@@ -17,6 +17,7 @@ class Object(object):
 
   def __init__(self, **kwargs):
     assert self.iface, "%s.iface must be defined" % self.__class__.__name__
+
     for attr, default_value in self.iface.attributes():
       value = kwargs.get(attr, default_value)
       setattr(self, attr, value)

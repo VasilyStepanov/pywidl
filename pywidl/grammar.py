@@ -62,7 +62,7 @@ def p_CallbackRestOrInterface(p):
 def p_Interface(p):
   """Interface : interface IDENTIFIER Inheritance "{" InterfaceMembers "}" ";"
   """
-  p[0] = model.Interface(name=p[2], parent=p[3])
+  p[0] = model.Interface(name=p[2], parent=p[3], members=p[5])
 
 
 
@@ -75,13 +75,15 @@ def p_PartialInterface(p):
 
 # 7
 def p_InterfaceMembers(p):
-  """InterfaceMembers : ExtendedAttributeList InterfaceMember InterfaceMembers
+  """InterfaceMembers : InterfaceMembers ExtendedAttributeList InterfaceMember
   """
+  p[0] = p[1] + [p[3]]
 
 
 # 7
 def p_InterfaceMembers_empty(p):
   """InterfaceMembers :"""
+  p[0] = []
 
 
 
@@ -90,6 +92,7 @@ def p_InterfaceMember(p):
   """InterfaceMember : Const
                      | AttributeOrOperation
   """
+  p[0] = p[1]
 
 
 
@@ -239,6 +242,7 @@ def p_AttributeOrOperation(p):
                           | Attribute
                           | Operation
   """
+  p[0] = p[1]
 
 
 
@@ -255,22 +259,35 @@ def p_StringifierAttributeOrOperation(p):
 def p_Attribute(p):
   """Attribute : Inherit ReadOnly attribute Type IDENTIFIER ";"
   """
+  p[0] = model.Attribute(inherit=p[1], readonly=p[2], type=p[4], name=p[5])
 
 
 
 # 29
-def p_Inherit(p):
-  """Inherit : inherit
-             |
-  """
+def p_Inherit_true(p):
+  """Inherit : inherit"""
+  p[0] = True
+
+
+
+# 29
+def p_Inherit_false(p):
+  """Inherit :"""
+  p[0] = False
 
 
 
 # 30
-def p_ReadOnly(p):
-  """ReadOnly : readonly
-              |
-  """
+def p_ReadOnly_true(p):
+  """ReadOnly : readonly"""
+  p[0] = True
+
+
+
+# 30
+def p_ReadOnly_false(p):
+  """ReadOnly :"""
+  p[0] = False
 
 
 
@@ -502,6 +519,7 @@ def p_Type(p):
   """Type : SingleType
           | UnionType TypeSuffix
   """
+  p[0] = p[1]
 
 
 

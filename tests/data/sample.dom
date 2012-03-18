@@ -1,6 +1,8 @@
 
 
 
+
+
 source: tests/data/sample.idl
 output: tests/received.dom
 template: tests/templates/dom.tpl
@@ -10,22 +12,56 @@ template_type: 0
 // unknown definition type <type 'NoneType'>
 
 
-
-interface Paint { };
-
-
-
-
-interface SolidColor : Paint { };
+interface Paint {
+};
 
 
 
+interface SolidColor : Paint {
 
-interface Pattern : Paint { };
+  attribute None red;
 
 
 
+  attribute None green;
 
-interface GraphicalWindow { };
+
+
+  attribute None blue;
+
+
+};
+
+
+
+interface Pattern : Paint {
+
+  attribute None imageURL;
+
+
+};
+
+
+
+interface GraphicalWindow {
+
+  readonly attribute None width;
+
+
+
+  readonly attribute None height;
+
+
+
+  attribute None currentPaint;
+
+
+
+// unknown interface member <type 'NoneType'>
+
+
+// unknown interface member <type 'NoneType'>
+
+};
 
 

@@ -12,3 +12,16 @@ class IDefinition(IObject):
 
 class IInterface(IDefinition):
   parent = None
+  members = []
+
+
+
+class IInterfaceMember(IObject):
+  name = None
+
+
+
+class IAttribute(IInterfaceMember):
+  inherit = False
+  readonly = False
+  type = None
