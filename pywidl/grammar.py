@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 from lexis import *
+import model
 
 import ply.yacc as yacc
 
@@ -11,12 +12,14 @@ import os
 # 1
 def p_Definitions(p):
   """Definitions : Definitions ExtendedAttributeList Definition"""
+  p[0] = p[1] + [p[3]]
 
 
 
 # 1
 def p_Definitions_empty(p):
   """Definitions :"""
+  p[0] = []
 
 
 
@@ -30,6 +33,7 @@ def p_Definition(p):
                 | Typedef
                 | ImplementsStatement
   """
+  p[0] = p[1]
 
 
 
@@ -42,6 +46,7 @@ def p_CallbackOrInterface_callback(p):
 # 3
 def p_CallbackOrInterface_interface(p):
   """CallbackOrInterface : Interface"""
+  p[0] = p[1]
 
 
 
@@ -57,6 +62,7 @@ def p_CallbackRestOrInterface(p):
 def p_Interface(p):
   """Interface : interface IDENTIFIER Inheritance "{" InterfaceMembers "}" ";"
   """
+  p[0] = model.Interface(p[2])
 
 
 

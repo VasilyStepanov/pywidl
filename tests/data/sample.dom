@@ -1,6 +1,31 @@
+
+
+
 source: tests/data/sample.idl
 output: tests/received.dom
 template: tests/templates/dom.mako
 template_type: 0
 
-definitions: None
+
+// unknown definition type <type 'NoneType'>
+
+
+
+interface Paint { };
+
+
+
+
+interface SolidColor { };
+
+
+
+
+interface Pattern { };
+
+
+
+
+interface GraphicalWindow { };
+
+
