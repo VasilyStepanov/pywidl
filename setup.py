@@ -7,8 +7,8 @@ from distutils.command.build_py import build_py
 
 class build_py_with_ply(build_py):
   def run(self, *args, **kwargs):
-    import pywidl.lexer
-    import pywidl.parser
+    import pywidl.lexis
+    import pywidl.grammar
     build_py.run(self, *args, **kwargs)
 
 def read(fname):

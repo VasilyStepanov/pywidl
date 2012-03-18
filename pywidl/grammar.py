@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-from lexer import tokens
+from lexis import tokens
 
 import ply.yacc as yacc
 

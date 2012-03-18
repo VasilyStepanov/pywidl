@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-from parser import parse
+from grammar import parse
 
 from mako.template import Template
 
