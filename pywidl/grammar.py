@@ -2,6 +2,7 @@
 
 from lexis import *
 import model
+import helper
 
 import ply.yacc as yacc
 
@@ -542,9 +543,15 @@ def p_Type(p):
 
 # 53 TODO
 def p_SingleType(p):
-  """SingleType : NonAnyType
-                | any TypeSuffixStartingWithArray
-  """
+  """SingleType : NonAnyType"""
+  p[0] = p[1]
+
+
+
+# 53
+def p_SingleType_any(p):
+  """SingleType : any TypeSuffixStartingWithArray"""
+  p[0] = helper.unwrapTypeSuffix(model.Any(), p[2])
 
 
 
@@ -628,18 +635,36 @@ def p_OptionalLong(p):
 
 # 63 TODO
 def p_TypeSuffix(p):
-  """TypeSuffix : "[" "]" TypeSuffix
-                | "?" TypeSuffixStartingWithArray
-                |
-  """
+  """TypeSuffix : "[" "]" TypeSuffix"""
+  p[0] = [helper.ARRAY] + p[3]
 
 
 
-# 64 TODO
+# 63
+def p_TypeSuffix_null(p):
+  """TypeSuffix : "?" TypeSuffixStartingWithArray"""
+  p[0] = [helper.NULLABLE] + p[2]
+
+
+
+# 63
+def p_TypeSuffix_empty(p):
+  """TypeSuffix :"""
+  p[0] = []
+
+
+
+# 64
 def p_TypeSuffixStartingWithArray(p):
-  """TypeSuffixStartingWithArray : "[" "]" TypeSuffix
-                                 |
-  """
+  """TypeSuffixStartingWithArray : "[" "]" TypeSuffix"""
+  p[0] = [helper.ARRAY] + p[3]
+
+
+
+# 64
+def p_TypeSuffixStartingWithArray_empty(p):
+  """TypeSuffixStartingWithArray :"""
+  p[0] = []
 
 
 

@@ -25,3 +25,24 @@ class IAttribute(IInterfaceMember):
   inherit = False
   readonly = False
   type = None
+
+
+
+class IType(IObject):
+  name = None
+  nullable = None
+
+
+
+class ISingleType(IType):
+  pass
+
+
+
+class IAny(ISingleType):
+  name = "Any"
+
+
+class IArray(IType):
+  name = "Array"
+  t = None

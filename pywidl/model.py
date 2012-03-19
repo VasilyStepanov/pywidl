@@ -1,10 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 from core import Object
-from interface import IDefinition
-from interface import IInterface
-from interface import IInterfaceMember
-from interface import IAttribute
+from interface import *
 
 
 
@@ -25,3 +22,23 @@ class InterfaceMember(Object):
 
 class Attribute(InterfaceMember):
   iface = IAttribute
+
+
+
+class Type(Object):
+  iface = IType
+
+
+
+class SingleType(Type):
+  iface = ISingleType
+
+
+
+class Any(Type):
+  iface = IAny
+
+
+
+class Array(Type):
+  iface = IArray

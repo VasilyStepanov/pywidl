@@ -1,15 +1,12 @@
-
-
-
-
-
 source: tests/data/sample.idl
 output: tests/received.dom
 template: tests/templates/dom.tpl
 template_type: 0
 
 
-// unknown definition type <type 'NoneType'>
+
+/* unknown definition type <type 'NoneType'> */
+
 
 
 interface Paint {
@@ -18,50 +15,23 @@ interface Paint {
 
 
 interface SolidColor : Paint {
-
-  attribute None red;
-
-
-
-  attribute None green;
-
-
-
-  attribute None blue;
-
-
+  attribute /* unknown type <type 'NoneType'> */ red;
+  attribute /* unknown type <type 'NoneType'> */ green;
+  attribute /* unknown type <type 'NoneType'> */ blue;
 };
 
 
 
 interface Pattern : Paint {
-
-  attribute None imageURL;
-
-
+  attribute /* unknown type <type 'NoneType'> */ imageURL;
 };
 
 
 
 interface GraphicalWindow {
-
-  readonly attribute None width;
-
-
-
-  readonly attribute None height;
-
-
-
-  attribute None currentPaint;
-
-
-
-// unknown interface member <type 'NoneType'>
-
-
-// unknown interface member <type 'NoneType'>
-
+  readonly attribute /* unknown type <type 'NoneType'> */ width;
+  readonly attribute /* unknown type <type 'NoneType'> */ height;
+  attribute /* unknown type <type 'NoneType'> */ currentPaint;
+/* unknown interface member <type 'NoneType'> */
+/* unknown interface member <type 'NoneType'> */
 };
-
-
