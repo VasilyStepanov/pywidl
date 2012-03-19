@@ -597,39 +597,90 @@ def p_ConstType(p):
 
 
 
-# 59 TODO
-def p_PrimitiveType(p):
-  """PrimitiveType : UnsignedIntegerType
-                   | boolean
-                   | byte
-                   | octet
-                   | float
-                   | double
-  """
+# 59
+def p_PrimitiveType_integer(p):
+  """PrimitiveType : UnsignedIntegerType"""
+  p[0] = p[1]
 
 
 
-# 60 TODO
+# 59
+def p_PrimitiveType_boolean(p):
+  """PrimitiveType : boolean"""
+  p[0] = model.Boolean()
+
+
+
+# 59
+def p_PrimitiveType_byte(p):
+  """PrimitiveType : byte"""
+  p[0] = model.Byte()
+
+
+
+# 59
+def p_PrimitiveType_octet(p):
+  """PrimitiveType : octet"""
+  p[0] = model.Octet()
+
+
+
+# 59
+def p_PrimitiveType_float(p):
+  """PrimitiveType : float"""
+  p[0] = model.Float()
+
+
+
+# 59
+def p_PrimitiveType_double(p):
+  """PrimitiveType : double"""
+  p[0] = model.Double()
+
+
+
+# 60
+def p_UnsignedIntegerType_unsigned(p):
+  """UnsignedIntegerType : unsigned IntegerType"""
+  p[0] = helper.unwrapIntegerType(True, p[2])
+
+
+
+# 60
 def p_UnsignedIntegerType(p):
-  """UnsignedIntegerType : unsigned IntegerType
-                         | IntegerType
-  """
+  """UnsignedIntegerType : IntegerType"""
+  p[0] = helper.unwrapIntegerType(False, p[2])
 
 
 
-# 61 TODO
-def p_IntegerType(p):
-  """IntegerType : short
-                 | long OptionalLong
-  """
+# 61
+def p_IntegerType_short(p):
+  """IntegerType : short"""
+  p[0] = helper.SHORT
 
 
 
-# 62 TODO
-def p_OptionalLong(p):
-  """OptionalLong : long
-                  |
-  """
+# 61
+def p_IntegerType_long(p):
+  """IntegerType : long OptionalLong"""
+  if not p[2]:
+    p[0] = helper.LONG
+  else:
+    p[2] = helper.LONGLONG
+
+
+
+# 62
+def p_OptionalLong_true(p):
+  """OptionalLong : long"""
+  p[0] = True
+
+
+
+# 62
+def p_OptionalLong_false(p):
+  """OptionalLong :"""
+  p[0] = False
 
 
 
