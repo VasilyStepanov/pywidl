@@ -1,0 +1,36 @@
+interface Type {
+  attribute short _short;
+  attribute unsigned short _ushort;
+  attribute long _long;
+  attribute unsigned long _ulong;
+  attribute long long _llong;
+  attribute unsigned long long _ullong;
+  attribute boolean _boolean;
+  attribute byte _byte;
+  attribute octet _octet;
+  attribute float _float;
+  attribute double _double;
+  attribute double _double;
+  attribute DOMString _string;
+  attribute MyInterface _myiface;
+  attribute sequence<long> _sequence;
+  attribute object _object;
+  attribute date _date;
+};
+
+
+
+interface TypeSuffix {
+  attribute long? _null;
+  attribute long[] _arr;
+  attribute long[]?[][]?[][][] _arrarr;
+  attribute sequence<long[]?[][]?[][][]> _sequence;
+};
+
+
+
+interface TypeSpecifier {
+  inherit attribute long _inh;
+  readonly attribute long _ro;
+  inherit readonly attribute long _inhro;
+};

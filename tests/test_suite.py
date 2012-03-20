@@ -38,8 +38,9 @@ class TestPyWIdl(unittest.TestCase):
     self.assertTrue(self._match(eta, rcv))
 
 
-  def test_basics(self):
-    self._buildDom("sample.idl")
+  def test_data(self):
+    for idl in os.listdir(os.path.join("tests", "data")):
+      if idl.endswith(".idl"): self._buildDom(idl)
 
 
 

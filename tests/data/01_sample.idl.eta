@@ -1,4 +1,4 @@
-// source: tests/data/sample.idl
+// source: tests/data/01_sample.idl
 // output: tests/received.idl
 // template: tests.idl
 // template_type: 0

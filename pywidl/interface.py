@@ -106,7 +106,6 @@ class IDouble(IPrimitiveType):
 
 class IDOMString(ISingleType):
   name = "String"
-  t = None
 
 
 
@@ -114,8 +113,10 @@ class IInterfaceType(ISingleType):
   pass
 
 
+
 class ISequence(ISingleType):
   name = "Sequence"
+  t = None
 
 
 
@@ -131,6 +132,7 @@ class IDate(ISingleType):
 
 class IAny(ISingleType):
   name = "Any"
+
 
 
 class IArray(IType):

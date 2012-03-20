@@ -610,7 +610,7 @@ def p_NonAnyType_sequence(p):
 # 57
 def p_NonAnyType_object(p):
   """NonAnyType : object TypeSuffix"""
-  p[0] = helper.unwrapTypeSuffix(model.ObjectType(), p[2])
+  p[0] = helper.unwrapTypeSuffix(model.Object(), p[2])
 
 
 
@@ -679,7 +679,7 @@ def p_UnsignedIntegerType_unsigned(p):
 # 60
 def p_UnsignedIntegerType(p):
   """UnsignedIntegerType : IntegerType"""
-  p[0] = helper.unwrapIntegerType(False, p[2])
+  p[0] = helper.unwrapIntegerType(False, p[1])
 
 
 
@@ -696,7 +696,7 @@ def p_IntegerType_long(p):
   if not p[2]:
     p[0] = helper.LONG
   else:
-    p[2] = helper.LONGLONG
+    p[0] = helper.LONGLONG
 
 
 
