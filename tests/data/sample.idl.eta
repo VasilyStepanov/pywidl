@@ -15,9 +15,9 @@ interface Paint {
 
 
 interface SolidColor : Paint {
-  attribute /* unknown type <type 'NoneType'> */ red;
-  attribute /* unknown type <type 'NoneType'> */ green;
-  attribute /* unknown type <type 'NoneType'> */ blue;
+  attribute float red;
+  attribute float green;
+  attribute float blue;
 };
 
 
@@ -29,9 +29,9 @@ interface Pattern : Paint {
 
 
 interface GraphicalWindow {
-  readonly attribute /* unknown type <type 'NoneType'> */ width;
-  readonly attribute /* unknown type <type 'NoneType'> */ height;
+  readonly attribute unsigned long width;
+  readonly attribute unsigned long height;
   attribute /* unknown type <type 'NoneType'> */ currentPaint;
-/* unknown interface member <type 'NoneType'> */
-/* unknown interface member <type 'NoneType'> */
+  /* unknown interface member <type 'NoneType'> */
+  /* unknown interface member <type 'NoneType'> */
 };

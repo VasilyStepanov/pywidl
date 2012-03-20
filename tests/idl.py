@@ -9,6 +9,28 @@ def emitType(typedef):
 
   if isinstance(typedef, pywidl.Any):
     ret = "any"
+  elif isinstance(typedef, pywidl.Short):
+    ret = "short"
+  elif isinstance(typedef, pywidl.UnsignedShort):
+    ret = "unsigned short"
+  elif isinstance(typedef, pywidl.Long):
+    ret = "long"
+  elif isinstance(typedef, pywidl.UnsignedLong):
+    ret = "unsigned long"
+  elif isinstance(typedef, pywidl.LongLong):
+    ret = "long long"
+  elif isinstance(typedef, pywidl.UnsignedLongLong):
+    ret = "unsigned long long"
+  elif isinstance(typedef, pywidl.Boolean):
+    ret = "boolean"
+  elif isinstance(typedef, pywidl.Byte):
+    ret = "byte"
+  elif isinstance(typedef, pywidl.Octet):
+    ret = "octet"
+  elif isinstance(typedef, pywidl.Float):
+    ret = "float"
+  elif isinstance(typedef, pywidl.Double):
+    ret = "double"
   elif isinstance(typedef, pywidl.Array):
     ret = "%s[]" % emitType(typedef.t)
   else:
@@ -38,7 +60,7 @@ def renderInterfaceMember(out, member):
   if isinstance(member, pywidl.Attribute):
     renderAttribute(out, member)
   else:
-    print >>out, "/* unknown interface member %s */" % type(member)
+    print >>out, "  /* unknown interface member %s */" % type(member)
 
 
 

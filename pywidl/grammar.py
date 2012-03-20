@@ -541,7 +541,7 @@ def p_Type(p):
 
 
 
-# 53 TODO
+# 53
 def p_SingleType(p):
   """SingleType : NonAnyType"""
   p[0] = p[1]
@@ -579,10 +579,16 @@ def p_UnionMemberTypes(p):
 
 
 
+# 57
+def p_NonAnyType_primitiveType(p):
+  """NonAnyType : PrimitiveType TypeSuffix"""
+  p[0] = helper.unwrapTypeSuffix(p[1], p[2])
+
+
+
 # 57 TODO
 def p_NonAnyType(p):
-  """NonAnyType : PrimitiveType TypeSuffix
-                | DOMString TypeSuffix
+  """NonAnyType : DOMString TypeSuffix
                 | IDENTIFIER TypeSuffix
                 | sequence "<" Type ">" Null
                 | object TypeSuffix
@@ -684,7 +690,7 @@ def p_OptionalLong_false(p):
 
 
 
-# 63 TODO
+# 63
 def p_TypeSuffix(p):
   """TypeSuffix : "[" "]" TypeSuffix"""
   p[0] = [helper.ARRAY] + p[3]
