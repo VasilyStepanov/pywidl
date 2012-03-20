@@ -29,11 +29,10 @@ class TestPyWIdl(unittest.TestCase):
 
   def _buildDom(self, source):
     src = os.path.join("tests", "data", source)
-    eta = os.path.join("tests", "data", "%s.dom" % source.rsplit('.', 1)[0])
-    rcv = os.path.join("tests", "received.dom")
+    eta = os.path.join("tests", "data", "%s.eta" % source)
+    rcv = os.path.join("tests", "received.idl")
 
-    app = App(src, rcv,
-      os.path.join("tests", "templates", "dom.tpl"))
+    app = App(src, rcv, "tests.idl", App.NATIVE_TEMPLATE)
     app.run()
 
     self.assertTrue(self._match(eta, rcv))

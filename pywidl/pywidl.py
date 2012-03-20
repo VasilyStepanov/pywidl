@@ -13,6 +13,7 @@ def printUsage():
 
   Options:
     -m, --mako
+    -n, --native
     -o, --output FILE
     -t, --template FILE
 """
@@ -20,10 +21,11 @@ def printUsage():
 
 
 class App(object):
-  MAKO_TEMPLATE = 0
+  NATIVE_TEMPLATE = 0
+  MAKO_TEMPLATE = 1
 
 
-  def __init__(self, source, output, template, template_type=MAKO_TEMPLATE):
+  def __init__(self, source, output, template, template_type=NATIVE_TEMPLATE):
     self._source = source
     self._output = output
     self._template = template
@@ -33,6 +35,16 @@ class App(object):
   def _parse(self):
     with open(self._source, 'r') as f:
       return parse(f.read())
+
+
+  def _emitNative(self, definitions):
+    exec("import %s as template" % self._template)
+    template.render(
+      definitions=definitions,
+      source=self._source,
+      output=self._output,
+      template=self._template,
+      template_type=self._template_type)
 
 
   def _emitMako(self, definitions):
@@ -47,7 +59,9 @@ class App(object):
 
   
   def _emit(self, definitions):
-    if self._template_type == self.MAKO_TEMPLATE:
+    if self._template_type == self.NATIVE_TEMPLATE:
+      self._emitNative(definitions)
+    elif self._template_type == self.MAKO_TEMPLATE:
       self._emitMako(definitions)
     else:
       raise ValueError("Unknown template type: %d" % self._template_type)
@@ -63,13 +77,15 @@ def main():
   source = None
   output = None
   template = None
-  template_type = App.MAKO_TEMPLATE
+  template_type = App.NATIVE_TEMPLATE
 
   i = 1
   while i < len(sys.argv):
     arg = sys.argv[i]
     if arg == "-m" or arg == "--mako":
       template_type = App.MAKO_TEMPLATE
+    elif arg == "-n" or arg == "--mako":
+      template_type = App.NATIVE_TEMPLATE
     elif arg == "-o" or arg == "--output":
       i += 1
       output = sys.argv[i]
