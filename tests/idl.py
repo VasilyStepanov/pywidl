@@ -7,9 +7,7 @@ import pywidl
 def emitType(typedef):
   ret = None
 
-  if isinstance(typedef, pywidl.Any):
-    ret = "any"
-  elif isinstance(typedef, pywidl.Short):
+  if isinstance(typedef, pywidl.Short):
     ret = "short"
   elif isinstance(typedef, pywidl.UnsignedShort):
     ret = "unsigned short"
@@ -31,6 +29,18 @@ def emitType(typedef):
     ret = "float"
   elif isinstance(typedef, pywidl.Double):
     ret = "double"
+  elif isinstance(typedef, pywidl.DOMString):
+    ret = "DOMString"
+  elif isinstance(typedef, pywidl.InterfaceType):
+    ret = typedef.name
+  elif isinstance(typedef, pywidl.Sequence):
+    ret = "sequence<%s>" % emitType(typedef.t)
+  elif isinstance(typedef, pywidl.Object):
+    ret = "object"
+  elif isinstance(typedef, pywidl.Date):
+    ret = "Date"
+  elif isinstance(typedef, pywidl.Any):
+    ret = "any"
   elif isinstance(typedef, pywidl.Array):
     ret = "%s[]" % emitType(typedef.t)
   else:

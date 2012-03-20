@@ -1,11 +1,11 @@
 # -*- coding: UTF-8 -*-
 
-from core import Object
+from core import PyWIdlObject
 from interface import *
 
 
 
-class Definition(Object):
+class Definition(PyWIdlObject):
   iface = IDefinition
 
 
@@ -15,7 +15,7 @@ class Interface(Definition):
 
 
 
-class InterfaceMember(Object):
+class InterfaceMember(PyWIdlObject):
   iface = IInterfaceMember
 
 
@@ -25,7 +25,7 @@ class Attribute(InterfaceMember):
 
 
 
-class Type(Object):
+class Type(PyWIdlObject):
   iface = IType
 
 
@@ -98,6 +98,31 @@ class Float(PrimitiveType):
 
 class Double(PrimitiveType):
   iface = IDouble
+
+
+
+class DOMString(SingleType):
+  iface = IDOMString
+
+
+
+class InterfaceType(SingleType):
+  iface = IInterfaceType
+
+
+
+class Sequence(SingleType):
+  iface = ISequence
+
+
+
+class Object(SingleType):
+  iface = IObject
+
+
+
+class Date(SingleType):
+  iface = IDate
 
 
 

@@ -586,14 +586,38 @@ def p_NonAnyType_primitiveType(p):
 
 
 
-# 57 TODO
+# 57
+def p_NonAnyType_domString(p):
+  """NonAnyType : DOMString TypeSuffix"""
+  p[0] = helper.unwrapTypeSuffix(model.DOMString(), p[2])
+
+
+
+# 57
+def p_NonAnyType_interface(p):
+  """NonAnyType : IDENTIFIER TypeSuffix"""
+  p[0] = helper.unwrapTypeSuffix(model.InterfaceType(name=p[1]), p[2])
+
+
+
+# 57
+def p_NonAnyType_sequence(p):
+  """NonAnyType : sequence "<" Type ">" Null"""
+  p[0] = model.Sequence(t=p[3], nullable=p[5])
+
+
+
+# 57
+def p_NonAnyType_object(p):
+  """NonAnyType : object TypeSuffix"""
+  p[0] = helper.unwrapTypeSuffix(model.ObjectType(), p[2])
+
+
+
+# 57
 def p_NonAnyType(p):
-  """NonAnyType : DOMString TypeSuffix
-                | IDENTIFIER TypeSuffix
-                | sequence "<" Type ">" Null
-                | object TypeSuffix
-                | Date TypeSuffix
-  """
+  """NonAnyType : Date TypeSuffix"""
+  p[0] = helper.unwrapTypeSuffix(model.Date(), p[2])
 
 
 

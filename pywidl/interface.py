@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
 
-from core import IObject
+from core import IPyWIdlObject
 
 
 
-class IDefinition(IObject):
+class IDefinition(IPyWIdlObject):
   name = None
   extended_attributes = []
 
@@ -16,7 +16,7 @@ class IInterface(IDefinition):
 
 
 
-class IInterfaceMember(IObject):
+class IInterfaceMember(IPyWIdlObject):
   name = None
 
 
@@ -28,7 +28,7 @@ class IAttribute(IInterfaceMember):
 
 
 
-class IType(IObject):
+class IType(IPyWIdlObject):
   name = None
   nullable = None
 
@@ -101,6 +101,31 @@ class IFloat(IPrimitiveType):
 
 class IDouble(IPrimitiveType):
   name = "Double"
+
+
+
+class IDOMString(ISingleType):
+  name = "String"
+  t = None
+
+
+
+class IInterfaceType(ISingleType):
+  pass
+
+
+class ISequence(ISingleType):
+  name = "Sequence"
+
+
+
+class IObject(ISingleType):
+  name = "Object"
+
+
+
+class IDate(ISingleType):
+  name = "Date"
 
 
 

@@ -1,4 +1,5 @@
 build/
 dist/
 pywidl.egg-info/
+parser.out
 *.pyc

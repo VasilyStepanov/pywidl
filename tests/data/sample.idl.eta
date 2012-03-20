@@ -23,7 +23,7 @@ interface SolidColor : Paint {
 
 
 interface Pattern : Paint {
-  attribute /* unknown type <type 'NoneType'> */ imageURL;
+  attribute DOMString imageURL;
 };
 
 
@@ -31,7 +31,7 @@ interface Pattern : Paint {
 interface GraphicalWindow {
   readonly attribute unsigned long width;
   readonly attribute unsigned long height;
-  attribute /* unknown type <type 'NoneType'> */ currentPaint;
+  attribute Paint currentPaint;
   /* unknown interface member <type 'NoneType'> */
   /* unknown interface member <type 'NoneType'> */
 };

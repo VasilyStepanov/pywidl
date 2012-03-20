@@ -2,7 +2,7 @@
 
 
 
-class IObject(object):
+class IPyWIdlObject(object):
   @classmethod
   def attributes(cls):
     for attr in dir(cls):
@@ -12,7 +12,7 @@ class IObject(object):
 
 
 
-class Object(object):
+class PyWIdlObject(object):
   iface = None
 
   def __init__(self, **kwargs):
