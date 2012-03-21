@@ -19,5 +19,7 @@ class PyWIdlObject(object):
     assert self.iface, "%s.iface must be defined" % self.__class__.__name__
 
     for attr, default_value in self.iface.attributes():
+      if hasattr(self, attr): continue
+      if hasattr(self.__class__, attr): continue
       value = kwargs.get(attr, default_value)
       setattr(self, attr, value)

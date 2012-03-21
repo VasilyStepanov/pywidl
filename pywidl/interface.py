@@ -142,5 +142,4 @@ class IArray(IType):
 
 
 class IUnionType(IType):
-  name = "UnionType"
   t = []

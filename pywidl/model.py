@@ -138,3 +138,9 @@ class Array(Type):
 
 class UnionType(Type):
   iface = IUnionType
+
+  def _getName(self):
+    return " Or ".join([t.name for t in self.t])
+
+  name = property(_getName)
+
