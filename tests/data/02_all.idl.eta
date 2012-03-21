@@ -23,6 +23,7 @@ interface Type {
   attribute sequence<long> _sequence;
   attribute object _object;
   attribute date _date;
+  attribute any _any;
 };
 
 
@@ -32,6 +33,7 @@ interface TypeSuffix {
   attribute long[] _arr;
   attribute long[]?[][]?[][][] _arrarr;
   attribute sequence<long[]?[][]?[][][]> _sequence;
+  attribute any[]?[][]?[][][] _any;
 };
 
 
