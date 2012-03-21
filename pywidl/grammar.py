@@ -532,12 +532,17 @@ def p_OtherOrComma(p):
 
 
 
-# 52 TODO
-def p_Type(p):
-  """Type : SingleType
-          | UnionType TypeSuffix
-  """
+# 52
+def p_Type_single(p):
+  """Type : SingleType"""
   p[0] = p[1]
+
+
+
+# 52
+def p_Type_union(p):
+  """Type : UnionType TypeSuffix"""
+  p[0] = helper.unwrapTypeSuffix(p[1], p[2])
 
 
 
@@ -555,27 +560,47 @@ def p_SingleType_any(p):
 
 
 
-# 54 TODO
+# 54
 def p_UnionType(p):
   """UnionType : "(" UnionMemberType or UnionMemberType UnionMemberTypes ")"
   """
+  t = [p[2]] + [p[4]] + p[5]
+  p[0] = model.UnionType(t=t)
 
 
 
-# 55 TODO
-def p_UnionMemberType(p):
-  """UnionMemberType : NonAnyType
-                     | UnionType TypeSuffix
-                     | any "[" "]" TypeSuffix
-  """
+# 55
+def p_UnionMemberType_nonAnyType(p):
+  """UnionMemberType : NonAnyType"""
+  p[0] = p[1]
 
 
 
-# 56 TODO
+# 55
+def p_UnionMemberType_unionType(p):
+  """UnionMemberType : UnionType TypeSuffix"""
+  p[0] = helper.unwrapTypeSuffix(p[1], p[2])
+
+
+
+# 55
+def p_UnionMemberType_anyType(p):
+  """UnionMemberType : any "[" "]" TypeSuffix"""
+  p[0] = helper.unwrapTypeSuffix(model.Array(t=model.Any()), p[4])
+
+
+
+# 56
 def p_UnionMemberTypes(p):
-  """UnionMemberTypes : or UnionMemberType UnionMemberTypes
-                      |
-  """
+  """UnionMemberTypes : or UnionMemberType UnionMemberTypes"""
+  p[0] = [p[2]] + p[3]
+
+
+
+# 56
+def p_UnionMemberTypes_empty(p):
+  """UnionMemberTypes : """
+  p[0] = []
 
 
 

@@ -43,6 +43,8 @@ def emitType(typedef):
     ret = "any"
   elif isinstance(typedef, pywidl.Array):
     ret = "%s[]" % emitType(typedef.t)
+  elif isinstance(typedef, pywidl.UnionType):
+    ret = "(%s)" % " or ".join([emitType(t) for t in typedef.t])
   else:
     return "/* unknown type %s */" % type(typedef)
 

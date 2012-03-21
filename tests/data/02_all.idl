@@ -17,6 +17,8 @@ interface Type {
   attribute object _object;
   attribute date _date;
   attribute any _any;
+
+  attribute (Node or (Date or Event) or (XMLHttpRequest or DOMString)? or (float[] or NodeList)[] or any[]?[]) _union;
 };
 
 

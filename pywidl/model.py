@@ -133,3 +133,8 @@ class Any(Type):
 
 class Array(Type):
   iface = IArray
+
+
+
+class UnionType(Type):
+  iface = IUnionType

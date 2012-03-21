@@ -138,3 +138,9 @@ class IAny(ISingleType):
 class IArray(IType):
   name = "Array"
   t = None
+
+
+
+class IUnionType(IType):
+  name = "UnionType"
+  t = []
