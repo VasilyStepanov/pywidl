@@ -75,7 +75,6 @@ t_ignore_line_comment = r'//.*'
 
 t_INTEGER = r"-?(0([0-7]*|[Xx][0-9A-Fa-f]+)|[1-9][0-9]*)"
 t_STRING = r"\"[^\"]*\""
-t_WHITESPACE = r"[\t\n\r ]+|[\t\n\r ]*((//.*|/\*.*?\*/)[\t\n\r ]*)+"
 t_ELLIPSIS = r"\.\.\."
 
 
@@ -89,7 +88,7 @@ def t_IDENTIFIER(t):
 
 
 def t_block_comment(t):
-  r"\/\*[^*]*\*+([^/*][^*]*\*+)*\/"
+  r"/\*.*?\*/"
   t.lexer.lineno += t.value.count('\n')
 
 
