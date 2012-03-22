@@ -52,3 +52,18 @@ interface InterfaceWAttributes {
    PutForwards=name]
   attribute long _long;
 };
+
+
+
+interface Operation {
+  void();
+  long operation();
+  static long operation();
+  getter setter creator deleter legacycaller long operation(
+      long arg,
+      [Replaceable]long ext_arg,
+      optional long opt_arg,
+      optional long opt_arg2 = 123,
+      optional long opt_arg2 = 123,
+      long... el_arg);
+};

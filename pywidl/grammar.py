@@ -21,7 +21,7 @@ def p_Definitions(p):
 
 # 1
 def p_Definitions_empty(p):
-  """Definitions :"""
+  """Definitions : """
   p[0] = []
 
 
@@ -76,19 +76,17 @@ def p_PartialInterface(p):
 
 
 
-# 7 TODO
+# 7
 def p_InterfaceMembers(p):
-  """InterfaceMembers : InterfaceMembers ExtendedAttributeList InterfaceMember
-  """
-  if p[3]:
-    p[3].extended_attributes = p[2]
+  """InterfaceMembers : InterfaceMembers ExtendedAttributeList InterfaceMember"""
+  p[3].extended_attributes = p[2]
   p[0] = p[1] + [p[3]]
 
 
 
 # 7
 def p_InterfaceMembers_empty(p):
-  """InterfaceMembers :"""
+  """InterfaceMembers : """
   p[0] = []
 
 
@@ -117,7 +115,7 @@ def p_DictionaryMembers(p):
 
 # 10 TODO
 def p_DictionaryMembers_empty(p):
-  """DictionaryMembers :"""
+  """DictionaryMembers : """
 
 
 
@@ -128,15 +126,18 @@ def p_DictionaryMember(p):
 
 
 
-# 12 TODO
+# 12
 def p_Default(p):
   """Default : "=" DefaultValue"""
+  p[0] = p[2]
 
 
 
-# 12 TODO
+# 12
 def p_Default_empty(p):
-  """Default :"""
+  """Default : """
+  p[0] = None
+
 
 
 
@@ -144,8 +145,14 @@ def p_Default_empty(p):
 def p_DefaultValue(p):
   """DefaultValue : ConstValue
                   | STRING
-                  |
   """
+
+
+
+# 13
+def p_DefaultValue_empty(p):
+  """DefaultValue : """
+  p[0] = None
 
 
 
@@ -173,7 +180,7 @@ def p_Inheritance(p):
 
 # 16
 def p_Inheritance_empty(p):
-  """Inheritance :"""
+  """Inheritance : """
   p[0] = None
 
 
@@ -294,7 +301,7 @@ def p_Inherit_true(p):
 
 # 29
 def p_Inherit_false(p):
-  """Inherit :"""
+  """Inherit : """
   p[0] = False
 
 
@@ -308,102 +315,178 @@ def p_ReadOnly_true(p):
 
 # 30
 def p_ReadOnly_false(p):
-  """ReadOnly :"""
+  """ReadOnly : """
   p[0] = False
 
 
 
-# 31 TODO
+# 31
 def p_Operation(p):
   """Operation : Qualifiers OperationRest"""
+  p[0] = helper.applyQualifiers(p[2], p[1])
 
 
 
-# 32 TODO
-def p_Qualifiers(p):
-  """Qualifiers : static
-                | Specials
-  """
+# 32
+def p_Qualifiers_static(p):
+  """Qualifiers : static"""
+  p[0] = [helper.STATIC]
 
 
 
-# 33 TODO
+# 32
+def p_Qualifiers_specials(p):
+  """Qualifiers : Specials"""
+  p[0] = p[1]
+
+
+
+# 33
 def p_Specials(p):
-  """Specials : Special Specials
-              |
-  """
+  """Specials : Special Specials"""
+  p[0] = [p[1]] + p[2]
 
 
 
-# 34 TODO
-def p_Special(p):
-  """Special : getter
-             | setter
-             | creator
-             | deleter
-             | legacycaller
-  """
+# 33
+def p_Specials_empty(p):
+  """Specials : """
+  p[0] = []
 
 
 
-# 35 TODO
+# 34
+def p_Special_getter(p):
+  """Special : getter"""
+  p[0] = helper.GETTER
+
+
+
+# 34
+def p_Special_setter(p):
+  """Special : setter"""
+  p[0] = helper.SETTER
+
+
+
+# 34
+def p_Special_creator(p):
+  """Special : creator"""
+  p[0] = helper.CREATOR
+
+
+
+# 34
+def p_Special_deleter(p):
+  """Special : deleter"""
+  p[0] = helper.DELETER
+
+
+
+# 34
+def p_Special_legacycaller(p):
+  """Special : legacycaller"""
+  p[0] = helper.LEGACYCALLER
+
+
+
+# 35
 def p_OperationRest(p):
   """OperationRest : ReturnType OptionalIdentifier "(" ArgumentList ")" ";"
   """
+  p[0] = model.Operation(return_type=p[1], name=p[2], arguments=p[4])
 
 
 
-# 36 TODO
+# 36
 def p_OptionalIdentifier(p):
-  """OptionalIdentifier : IDENTIFIER
-                        |
-  """
+  """OptionalIdentifier : IDENTIFIER"""
+  p[0] = p[1]
 
 
 
-# 37 TODO
+# 36
+def p_OptionalIdentifier_empty(p):
+  """OptionalIdentifier : """
+  p[0] = None
+
+
+
+# 37
 def p_ArgumentList(p):
-  """ArgumentList : Argument Arguments
-                  |
-  """
+  """ArgumentList : Argument Arguments"""
+  p[0] = [p[1]] + p[2]
 
 
 
-# 38 TODO
+# 37
+def p_ArgumentList_empty(p):
+  """ArgumentList : """
+  p[0] = []
+
+
+
+# 38
 def p_Arguments(p):
-  """Arguments : "," Argument Arguments
-               |
-  """
+  """Arguments : "," Argument Arguments"""
+  p[0] = [p[2]] + p[3]
 
 
 
-# 39 TODO
+# 38
+def p_Arguments_empty(p):
+  """Arguments : """
+  p[0] = []
+
+
+
+# 39
 def p_Argument(p):
   """Argument : ExtendedAttributeList OptionalOrRequiredArgument"""
+  p[0] = p[2]
+  p[0].extended_attributes = p[1]
 
 
 
-# 40 TODO
+# 40
+def p_OptionalOrRequiredArgument_optional(p):
+  """OptionalOrRequiredArgument : Optional Type IDENTIFIER Default"""
+  p[0] = model.Argument(type=p[2], name=p[3], optional=p[1], default=p[4])
+
+
+
+# 40
 def p_OptionalOrRequiredArgument(p):
-  """OptionalOrRequiredArgument : optional Type IDENTIFIER Default
-                                | Type Ellipsis IDENTIFIER
-  """
+  """OptionalOrRequiredArgument : Type Ellipsis IDENTIFIER"""
+  p[0] = model.Argument(type=p[1], ellipsis=p[2], name=p[3])
 
 
 
-# # 41
-# def p_Optional(p):
-#   """Optional : optional
-#               |
-#   """
+# 41
+def p_Optional_true(p):
+  """Optional : optional"""
+  p[0] = True
 
 
 
-# 42 TODO
-def p_Ellipsis(p):
-  """Ellipsis : ELLIPSIS
-              |
-  """
+# 41
+def p_Optional_false(p):
+  """Optional : """
+  p[0] = False
+
+
+
+# 42
+def p_Ellipsis_true(p):
+  """Ellipsis : ELLIPSIS"""
+  p[0] = True
+
+
+
+# 42
+def p_Ellipsis_false(p):
+  """Ellipsis : """
+  p[0] = False
 
 
 
@@ -432,7 +515,7 @@ def p_ExtendedAttributeList(p):
 
 # 45
 def p_ExtendedAttributeList_empty(p):
-    """ExtendedAttributeList :"""
+    """ExtendedAttributeList : """
     p[0] = []
 
 
@@ -446,7 +529,7 @@ def p_ExtendedAttributes(p):
 
 # 46
 def p_ExtendedAttributes_empty(p):
-    """ExtendedAttributes :"""
+    """ExtendedAttributes : """
     p[0] = []
 
 
@@ -753,7 +836,7 @@ def p_OptionalLong_true(p):
 
 # 62
 def p_OptionalLong_false(p):
-  """OptionalLong :"""
+  """OptionalLong : """
   p[0] = False
 
 
@@ -774,7 +857,7 @@ def p_TypeSuffix_null(p):
 
 # 63
 def p_TypeSuffix_empty(p):
-  """TypeSuffix :"""
+  """TypeSuffix : """
   p[0] = []
 
 
@@ -788,7 +871,7 @@ def p_TypeSuffixStartingWithArray(p):
 
 # 64
 def p_TypeSuffixStartingWithArray_empty(p):
-  """TypeSuffixStartingWithArray :"""
+  """TypeSuffixStartingWithArray : """
   p[0] = []
 
 
@@ -803,16 +886,22 @@ def p_Null_true(p):
 
 # 65
 def p_Null_false(p):
-  """Null :"""
+  """Null : """
   p[0] = False
 
 
 
-# 66 TODO
+# 66
 def p_ReturnType(p):
-  """ReturnType : Type
-                | void
-  """
+  """ReturnType : Type"""
+  p[0] = p[1]
+
+
+
+# 66
+def p_ReturnType_void(p):
+  """ReturnType : void"""
+  p[0] = model.Void()
 
 
 

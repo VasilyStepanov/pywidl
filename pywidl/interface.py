@@ -142,6 +142,11 @@ class IArray(IType):
 
 
 
+class IVoid(IType):
+  name = "void"
+
+
+
 class IUnionType(IType):
   t = []
 
@@ -155,4 +160,28 @@ class IExtendedAttribute(IPyWIdlObject):
 
 class IExtendedAttributeValue(IPyWIdlObject):
   name = None
-  args = []
+  arguments = []
+
+
+
+class IArgument(IPyWIdlObject):
+  type = None
+  name = None
+  optional = False
+  default = None
+  ellipsis = False
+  extended_attributes = []
+
+
+
+class IOperation(IPyWIdlObject):
+  name = None
+  return_type = None
+  arguments = []
+  extended_attributes = []
+  static = False
+  getter = False
+  setter = False
+  creator = False
+  deleter = False
+  legacycaller = False

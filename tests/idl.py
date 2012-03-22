@@ -43,6 +43,8 @@ def emitType(typedef):
     ret = "any"
   elif isinstance(typedef, pywidl.Array):
     ret = "%s[]" % emitType(typedef.t)
+  elif isinstance(typedef, pywidl.Void):
+    ret = "void"
   elif isinstance(typedef, pywidl.UnionType):
     ret = "(%s)" % " or ".join([emitType(t) for t in typedef.t])
   else:
@@ -55,13 +57,42 @@ def emitType(typedef):
 
 
 
+def emitArgument(argument):
+  if argument.extended_attributes:
+    extended_attributes = "%s " % emitExtendedAttributes("",
+      argument.extended_attributes)
+  else:
+    extended_attributes = ""
+
+  type = emitType(argument.type)
+  if argument.ellipsis: type = "%s..." % type
+
+  a = "%(extended_attributes)s%(type)s %(name)s" % {
+      "extended_attributes" : extended_attributes,
+      "type" : type,
+      "name" : argument.name,
+    }
+
+  if argument.optional:
+    a = "optional %s" % a
+
+  if argument.default:
+    a = "%s=%s" % a, argument.default
+
+  return a
+
+
+
+def emitArguments(arguments):
+  return ", ".join([emitArgument(argument) for argument in arguments])
+
+
+
 def emitExtendedAttributeValue(value):
-  if not value.args:
+  if not value.arguments:
     return value.name
 
-  return "%s(%s)" % ( \
-    value.name,
-    ", ".join(arg for arg in value.args))
+  return "%s(%s)" % (value.name, emitArguments(value.arguments))
 
 
 
@@ -74,6 +105,14 @@ def emitExtendedAttribute(attribute):
   return "%s=%s" % ( \
     attribute.name,
     emitExtendedAttributeValue(attribute.value))
+
+
+
+def emitExtendedAttributes(indent, attributes):
+  if not attributes: return ""
+
+  return "%s[%s]" % (indent, (",\n%s " % indent).join(
+    [emitExtendedAttribute(attribute) for attribute in attributes]))
 
 
 
@@ -99,9 +138,33 @@ def renderAttribute(out, attribute):
     }
 
 
+
+def renderOperation(out, operation):
+  qualifiers = []
+  if operation.static: qualifiers.append("static")
+  if operation.getter: qualifiers.append("getter")
+  if operation.setter: qualifiers.append("setter")
+  if operation.creator: qualifiers.append("creator")
+  if operation.deleter: qualifiers.append("deleter")
+  if operation.legacycaller: qualifiers.append("legacycaller")
+
+  specifier = emitType(operation.return_type)
+  if operation.name: specifier = "%s %s" % (specifier, operation.name)
+
+  renderExtendedAttributes(out, "  ", operation.extended_attributes)
+  print >>out, "  %(qualifiers)s%(specifier)s(%(arguments)s);" % {
+      "qualifiers" : "".join([qualifier + " " for qualifier in qualifiers]),
+      "specifier" : specifier,
+      "arguments" : emitArguments(operation.arguments),
+    }
+
+
+
 def renderInterfaceMember(out, member):
   if isinstance(member, pywidl.Attribute):
     renderAttribute(out, member)
+  elif isinstance(member, pywidl.Operation):
+    renderOperation(out, member)
   else:
     print >>out, "  /* unknown interface member %s */" % type(member)
 

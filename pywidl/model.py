@@ -136,6 +136,11 @@ class Array(Type):
 
 
 
+class Void(Type):
+  iface = IVoid
+
+
+
 class UnionType(Type):
   iface = IUnionType
 
@@ -153,3 +158,13 @@ class ExtendedAttribute(PyWIdlObject):
 
 class ExtendedAttributeValue(PyWIdlObject):
   iface = IExtendedAttributeValue
+
+
+
+class Argument(PyWIdlObject):
+  iface = IArgument
+
+
+
+class Operation(PyWIdlObject):
+  iface = IOperation
