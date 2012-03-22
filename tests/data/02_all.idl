@@ -38,3 +38,17 @@ interface TypeSpecifier {
   readonly attribute long _ro;
   inherit readonly attribute long _inhro;
 };
+
+
+
+[Replaceable,
+ Constructor(float x, float y),
+ NamedConstructor=Image(DOMString src),
+ PutForwards=name]
+interface InterfaceWAttributes {
+  [Replaceable,
+   Constructor(float x, float y),
+   NamedConstructor=Image(DOMString src),
+   PutForwards=name]
+  attribute long _long;
+};

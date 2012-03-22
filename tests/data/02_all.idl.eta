@@ -44,3 +44,17 @@ interface TypeSpecifier {
   readonly attribute long _ro;
   inherit readonly attribute long _inhro;
 };
+
+
+
+[Replaceable,
+ Constructor,
+ NamedConstructor=Image,
+ PutForwards=name]
+interface InterfaceWAttributes {
+  [Replaceable,
+   Constructor,
+   NamedConstructor=Image,
+   PutForwards=name]
+  attribute long _long;
+};

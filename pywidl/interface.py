@@ -18,6 +18,7 @@ class IInterface(IDefinition):
 
 class IInterfaceMember(IPyWIdlObject):
   name = None
+  extended_attributes = []
 
 
 
@@ -143,3 +144,15 @@ class IArray(IType):
 
 class IUnionType(IType):
   t = []
+
+
+
+class IExtendedAttribute(IPyWIdlObject):
+  name = None
+  value = None
+
+
+
+class IExtendedAttributeValue(IPyWIdlObject):
+  name = None
+  args = []

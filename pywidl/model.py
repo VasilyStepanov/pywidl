@@ -144,3 +144,12 @@ class UnionType(Type):
 
   name = property(_getName)
 
+
+
+class ExtendedAttribute(PyWIdlObject):
+  iface = IExtendedAttribute
+
+
+
+class ExtendedAttributeValue(PyWIdlObject):
+  iface = IExtendedAttributeValue

@@ -13,6 +13,8 @@ import os
 # 1 TODO
 def p_Definitions(p):
   """Definitions : Definitions ExtendedAttributeList Definition"""
+  if p[3]:
+    p[3].extended_attributes = p[2]
   p[0] = p[1] + [p[3]]
 
 
@@ -78,6 +80,8 @@ def p_PartialInterface(p):
 def p_InterfaceMembers(p):
   """InterfaceMembers : InterfaceMembers ExtendedAttributeList InterfaceMember
   """
+  if p[3]:
+    p[3].extended_attributes = p[2]
   p[0] = p[1] + [p[3]]
 
 
@@ -418,117 +422,132 @@ def p_ExceptionField(p):
 
 
 
-# 45 TODO
+# 45
 def p_ExtendedAttributeList(p):
     """ExtendedAttributeList : "[" ExtendedAttribute ExtendedAttributes "]"
     """
+    p[0] = [p[2]] + p[3]
 
 
 
-# 45 TODO
+# 45
 def p_ExtendedAttributeList_empty(p):
     """ExtendedAttributeList :"""
+    p[0] = []
 
 
 
-# 46 TODO
+# 46
 def p_ExtendedAttributes(p):
     """ExtendedAttributes : "," ExtendedAttribute ExtendedAttributes"""
+    p[0] = [p[2]] + p[3]
 
 
 
-# 46 TODO
+# 46
 def p_ExtendedAttributes_empty(p):
     """ExtendedAttributes :"""
+    p[0] = []
 
 
 
-# 47 TODO
+# # 47
+# def p_ExtendedAttribute(p):
+#   """ExtendedAttribute : "(" ExtendedAttributeInner ")" ExtendedAttributeRest
+#                        | "[" ExtendedAttributeInner "]" ExtendedAttributeRest
+#                        | "{" ExtendedAttributeInner "}" ExtendedAttributeRest
+#                        | Other ExtendedAttributeRest
+#   """
+
+
+
+# 47
 def p_ExtendedAttribute(p):
-  """ExtendedAttribute : "(" ExtendedAttributeInner ")" ExtendedAttributeRest
-                       | "[" ExtendedAttributeInner "]" ExtendedAttributeRest
-                       | "{" ExtendedAttributeInner "}" ExtendedAttributeRest
-                       | Other ExtendedAttributeRest
+  """ExtendedAttribute : ExtendedAttributeNoArgs
+                       | ExtendedAttributeArgList
+                       | ExtendedAttributeIdent
+                       | ExtendedAttributeNamedArgList
   """
+  p[0] = p[1]
 
 
 
-# 48 TODO
-def p_ExtendedAttributeRest(p):
-  """ExtendedAttributeRest : ExtendedAttribute
-                           |
-  """
+# # 48
+# def p_ExtendedAttributeRest(p):
+#   """ExtendedAttributeRest : ExtendedAttribute
+#                            |
+#   """
 
 
 
-# 49 TODO
-def p_ExtendedAttributeInner(p):
-  """ExtendedAttributeInner : "(" ExtendedAttributeInner ")" ExtendedAttributeInner
-                            | "[" ExtendedAttributeInner "]" ExtendedAttributeInner
-                            | "{" ExtendedAttributeInner "}" ExtendedAttributeInner
-                            | OtherOrComma ExtendedAttributeInner
-                            |
-  """
+# # 49
+# def p_ExtendedAttributeInner(p):
+#   """ExtendedAttributeInner : "(" ExtendedAttributeInner ")" ExtendedAttributeInner
+#                             | "[" ExtendedAttributeInner "]" ExtendedAttributeInner
+#                             | "{" ExtendedAttributeInner "}" ExtendedAttributeInner
+#                             | OtherOrComma ExtendedAttributeInner
+#                             |
+#   """
 
 
 
-# 50 TODO
-def p_Other(p):
-  """Other : INTEGER
-           | FLOAT
-           | IDENTIFIER
-           | STRING
-           | OTHER
-           | "."
-           | ELLIPSIS
-           | ":"
-           | ";"
-           | "<"
-           | "="
-           | ">"
-           | "?"
-           | Date
-           | DOMString
-           | any
-           | attribute
-           | boolean
-           | byte
-           | legacycaller
-           | const
-           | creator
-           | deleter
-           | double
-           | exception
-           | false
-           | float
-           | getter
-           | implements
-           | inherit
-           | interface
-           | long
-           | null
-           | object
-           | octet
-           | optional
-           | or
-           | sequence
-           | setter
-           | short
-           | static
-           | stringifier
-           | true
-           | typedef
-           | unsigned
-           | void
-  """
+# # 50
+# def p_Other(p):
+#   """Other : INTEGER
+#            | FLOAT
+#            | IDENTIFIER
+#            | STRING
+#            | OTHER
+#            | "."
+#            | ELLIPSIS
+#            | ":"
+#            | ";"
+#            | "<"
+#            | "="
+#            | ">"
+#            | "?"
+#            | Date
+#            | DOMString
+#            | any
+#            | attribute
+#            | boolean
+#            | byte
+#            | legacycaller
+#            | const
+#            | creator
+#            | deleter
+#            | double
+#            | exception
+#            | false
+#            | float
+#            | getter
+#            | implements
+#            | inherit
+#            | interface
+#            | long
+#            | null
+#            | object
+#            | octet
+#            | optional
+#            | or
+#            | sequence
+#            | setter
+#            | short
+#            | static
+#            | stringifier
+#            | true
+#            | typedef
+#            | unsigned
+#            | void
+#   """
 
 
 
-# 51 TODO
-def p_OtherOrComma(p):
-  """OtherOrComma : Other
-                  | ","
-  """
+# # 51
+# def p_OtherOrComma(p):
+#   """OtherOrComma : Other
+#                   | ","
+#   """
 
 
 
@@ -797,30 +816,39 @@ def p_ReturnType(p):
 
 
 
-# # 67
-# def p_ExtendedAttributeNoArgs(p):
-#   """ExtendedAttributeNoArgs : IDENTIFIER"""
+# 67
+def p_ExtendedAttributeNoArgs(p):
+  """ExtendedAttributeNoArgs : IDENTIFIER"""
+  p[0] = model.ExtendedAttribute(
+    value=model.ExtendedAttributeValue(name=p[1]))
 
 
 
-# # 68
-# def p_ExtendedAttributeArgList(p):
-#   """ExtendedAttributeArgList : IDENTIFIER "(" ArgumentList ")"
-#   """
+# 68
+def p_ExtendedAttributeArgList(p):
+  """ExtendedAttributeArgList : IDENTIFIER "(" ArgumentList ")"
+  """
+  p[0] = model.ExtendedAttribute(
+    value=model.ExtendedAttributeValue(name=p[1], value=p[3]))
 
 
 
-# # 69
-# def p_ExtendedAttributeIdent(p):
-#   """ExtendedAttributeIdent : IDENTIFIER "=" IDENTIFIER
-#   """
+# 69
+def p_ExtendedAttributeIdent(p):
+  """ExtendedAttributeIdent : IDENTIFIER "=" IDENTIFIER"""
+  p[0] = model.ExtendedAttribute(
+    name=p[1],
+    value=model.ExtendedAttributeValue(name=p[3]))
 
 
 
-# # 70
-# def p_ExtendedAttributeNamedArgList(p):
-#   """ExtendedAttributeNamedArgList : IDENTIFIER "=" IDENTIFIER "(" ArgumentList ")"
-#   """
+# 70
+def p_ExtendedAttributeNamedArgList(p):
+  """ExtendedAttributeNamedArgList : IDENTIFIER "=" IDENTIFIER "(" ArgumentList ")"
+  """
+  p[0] = model.ExtendedAttribute(
+    name=p[1],
+    value=model.ExtendedAttributeValue(name=p[3], value=p[5]))
 
 
 

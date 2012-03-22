@@ -55,12 +55,43 @@ def emitType(typedef):
 
 
 
+def emitExtendedAttributeValue(value):
+  if not value.args:
+    return value.name
+
+  return "%s(%s)" % ( \
+    value.name,
+    ", ".join(arg for arg in value.args))
+
+
+
+def emitExtendedAttribute(attribute):
+  if not attribute.value:
+    return attribute.name
+  if not attribute.name:
+    return emitExtendedAttributeValue(attribute.value)
+
+  return "%s=%s" % ( \
+    attribute.name,
+    emitExtendedAttributeValue(attribute.value))
+
+
+
+def renderExtendedAttributes(out, indent, attributes):
+  if not attributes: return
+
+  print >>out, "%s[%s]" % (indent, (",\n%s " % indent).join(
+    [emitExtendedAttribute(attribute) for attribute in attributes]))
+
+
+
 def renderAttribute(out, attribute):
   specifier = "attribute"
   if attribute.readonly: specifier = "readonly %s" % specifier
   if attribute.inherit: specifier = "inherit %s" % specifier
 
 
+  renderExtendedAttributes(out, "  ", attribute.extended_attributes)
   print >>out, "  %(specifier)s %(type)s %(name)s;" % {
       "specifier" : specifier,
       "type" : emitType(attribute.type),
@@ -83,6 +114,7 @@ def renderInterface(out, interface):
     declaration = "%s" % interface.name
 
 
+  renderExtendedAttributes(out, "", interface.extended_attributes)
   print >>out, "interface %s {" % declaration
 
   for member in interface.members:

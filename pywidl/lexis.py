@@ -15,7 +15,6 @@ tokens = [
   "FLOAT",
   "IDENTIFIER",
   "STRING",
-  "OTHER",
   "ELLIPSIS",
 ]
 
