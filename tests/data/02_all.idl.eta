@@ -71,10 +71,14 @@ interface Operation {
 
 
 interface Const {
-  const long _long = None;
-  const long? _nulllong = None;
-  const boolean _b1 = None;
-  const boolean _b2 = None;
-  const float _f = None;
-  const long _ea = None;
+  const long _long = 1;
+  const long? _nulllong = null;
+  const boolean _b1 = true;
+  const boolean _b2 = false;
+  const float _f = 1.23;
+  [Replaceable,
+   Constructor(float x, float y),
+   NamedConstructor=Image(DOMString src),
+   PutForwards=name]
+  const long _ea = 123;
 };

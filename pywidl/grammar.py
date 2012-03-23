@@ -235,14 +235,31 @@ def p_Const(p):
 
 
 
-# 24 TODO
-def p_ConstValue(p):
-  """ConstValue : BooleanLiteral
-                | INTEGER
-                | FLOAT
-                | null
-  """
+# 24
+def p_ConstValue_boolean(p):
+  """ConstValue : BooleanLiteral"""
+  p[0] = model.BooleanValue(value=p[1])
 
+
+
+# 24
+def p_ConstValue_integer(p):
+  """ConstValue : INTEGER"""
+  p[0] = model.IntegerValue(value=p[1])
+
+
+
+# 24
+def p_ConstValue_float(p):
+  """ConstValue : FLOAT"""
+  p[0] = model.FloatValue(value=p[1])
+
+
+
+# 24
+def p_ConstValue_null(p):
+  """ConstValue : null"""
+  p[0] = model.NullValue(value=p[1])
 
 
 # 25

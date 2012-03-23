@@ -173,3 +173,28 @@ class Operation(PyWIdlObject):
 
 class Const(InterfaceMember):
   iface = IConst
+
+
+
+class Value(PyWIdlObject):
+  iface = IValue
+
+
+
+class BooleanValue(Value):
+  iface = IBooleanValue
+
+
+
+class IntegerValue(Value):
+  iface = IIntegerValue
+
+
+
+class FloatValue(Value):
+  iface = IFloatValue
+
+
+
+class NullValue(Value):
+  iface = INullValue

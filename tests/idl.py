@@ -160,9 +160,24 @@ def renderOperation(out, operation):
 
 
 
+def emitValue(value):
+  if isinstance(value, pywidl.BooleanValue):
+    return value.value and "true" or "false"
+  if isinstance(value, pywidl.IntegerValue):
+    return value.value
+  if isinstance(value, pywidl.FloatValue):
+    return value.value
+  if isinstance(value, pywidl.NullValue):
+    return "null"
+  else:
+    return "/* unknown value type %s */" % value
+
+
+
 def renderConst(out, const):
+  renderExtendedAttributes(out, "  ", const.extended_attributes)
   print >>out, "  const %s %s = %s;" % ( \
-    emitType(const.type), const.name, const.value)
+    emitType(const.type), const.name, emitValue(const.value))
 
 
 

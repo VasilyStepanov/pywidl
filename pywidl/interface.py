@@ -193,3 +193,28 @@ class IConst(IInterfaceMember):
   type = None
   value = None
   extended_attributes = []
+
+
+
+class IValue(IPyWIdlObject):
+  value = None
+
+
+
+class IBooleanValue(IValue):
+  pass
+
+
+
+class IIntegerValue(IValue):
+  pass
+
+
+
+class IFloatValue(IValue):
+  pass
+
+
+
+class INullValue(IValue):
+  pass
