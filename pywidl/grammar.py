@@ -478,8 +478,8 @@ def p_Argument(p):
 
 # 40
 def p_OptionalOrRequiredArgument_optional(p):
-  """OptionalOrRequiredArgument : Optional Type IDENTIFIER Default"""
-  p[0] = model.Argument(type=p[2], name=p[3], optional=p[1], default=p[4])
+  """OptionalOrRequiredArgument : optional Type IDENTIFIER Default"""
+  p[0] = model.Argument(type=p[2], name=p[3], optional=True, default=p[4])
 
 
 
@@ -490,17 +490,11 @@ def p_OptionalOrRequiredArgument(p):
 
 
 
-# 41
-def p_Optional_true(p):
-  """Optional : optional"""
-  p[0] = True
-
-
-
-# 41
-def p_Optional_false(p):
-  """Optional : """
-  p[0] = False
+# # 41
+# def p_Optional(p):
+#   """Optional : optional
+#               |
+#   """
 
 
 
