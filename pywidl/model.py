@@ -248,10 +248,7 @@ class Array(Type):
 
 
 class Void(Type):
-
-  def __init__(self, **kwargs):
-
-    super(Void, self).__init__(**kwargs)
+  pass
 
 
 
@@ -329,14 +326,11 @@ class Operation(PyWIdlObject):
 
 class Const(InterfaceMember):
 
-  def __init__(self, name=None, type=None, value=None, extended_attributes=[],
-    **kwargs):
+  def __init__(self, type=None, value=None, **kwargs):
 
     super(Const, self).__init__(**kwargs)
-    self.name = name
     self.type = type
     self.value = value
-    self.extended_attributes = extended_attributes
 
 
 
@@ -391,3 +385,26 @@ class Typedef(Definition):
     super(Typedef, self).__init__(**kwargs)
     self.type = type
     self.type_extended_attributes= type_extended_attributes
+
+
+
+class Dictionary(Definition):
+
+  def __init__(self, parent=None, members=[], **kwargs):
+
+    super(Dictionary, self).__init__(**kwargs)
+    self.parent = parent
+    self.members = members
+
+
+
+class DictionaryMember(PyWIdlObject):
+
+  def __init__(self, type=None, name=None, default=None,
+    extended_attributes=[], **kwargs):
+
+    super(DictionaryMember, self).__init__(**kwargs)
+    self.type = type
+    self.name = name
+    self.default = default
+    self.extended_attributes = extended_attributes

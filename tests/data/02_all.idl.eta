@@ -91,4 +91,15 @@ Interface implements Functionality;
 
 
 
-[WTF] typedef [Clamp] octet Value;
+[WTF]
+typedef [Clamp] octet Value;
+
+
+
+[Replaceable]
+dictionary B : A {
+  long a;
+  [Clamp]
+  long b;
+  long c=123;
+};

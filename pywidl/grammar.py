@@ -100,29 +100,34 @@ def p_InterfaceMember(p):
 
 
 
-# 9 TODO
+# 9
 def p_Dictionary(p):
   """Dictionary : dictionary IDENTIFIER Inheritance "{" DictionaryMembers "}" ";"
   """
+  p[0] = model.Dictionary(name=p[2], parent=p[3], members=p[5])
 
 
 
-# 10 TODO
+# 10
 def p_DictionaryMembers(p):
   """DictionaryMembers : ExtendedAttributeList DictionaryMember DictionaryMembers"""
+  p[2].extended_attributes = p[1]
+  p[0] = [p[2]] + p[3]
 
 
 
-# 10 TODO
+# 10
 def p_DictionaryMembers_empty(p):
   """DictionaryMembers : """
+  p[0] = []
 
 
 
-# 11 TODO
+# 11
 def p_DictionaryMember(p):
   """DictionaryMember : Type IDENTIFIER Default ";"
   """
+  p[0] = model.DictionaryMember(type=p[1], name=p[2], default=p[3])
 
 
 

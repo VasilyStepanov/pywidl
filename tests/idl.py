@@ -197,6 +197,18 @@ def renderInterfaceMember(out, member):
 
 
 
+def renderDictionaryMember(out, member):
+  renderExtendedAttributes(out, "  ", member.extended_attributes)
+
+  m = "%s %s" % (emitType(member.type), member.name)
+
+  if member.default:
+    m = "%s=%s" % (m, emitValue(member.default))
+
+  print >>out, "  %s;" % m
+
+
+
 def renderInterface(out, interface):
   if interface.parent:
     declaration = "%s : %s" % (interface.name, interface.parent)
@@ -226,12 +238,24 @@ def renderTypedef(out, typedef):
   if typedef.type_extended_attributes: t = "%s %s" % ( \
     emitExtendedAttributes("", typedef.type_extended_attributes), t)
 
-  t = "typedef %s" % t
+  renderExtendedAttributes(out, "", typedef.extended_attributes)
+  print >>out, "typedef %s;" % t
 
-  if typedef.extended_attributes: t = "%s %s" % ( \
-    emitExtendedAttributes("", typedef.extended_attributes), t)
 
-  print >>out, "%s;" % t
+
+def renderDictionary(out, dictionary):
+  if dictionary.parent:
+    declaration = "%s : %s" % (dictionary.name, dictionary.parent)
+  else:
+    declaration = "%s" % dictionary.name
+
+  renderExtendedAttributes(out, "", dictionary.extended_attributes)
+  print >>out, "dictionary %s {" % declaration
+
+  for member in dictionary.members:
+    renderDictionaryMember(out, member)
+
+  print >>out, "};"
 
 
 
@@ -246,6 +270,8 @@ def renderDefinition(out, definition):
     renderImplementsStatement(out, definition)
   elif isinstance(definition, pywidl.Typedef):
     renderTypedef(out, definition)
+  elif isinstance(definition, pywidl.Dictionary):
+    renderDictionary(out, definition)
   else:
     print >>out, "/* unknown definition type %s */" % type(definition)
 
