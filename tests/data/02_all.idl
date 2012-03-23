@@ -64,7 +64,8 @@ interface Operation {
       [Replaceable]long ext_arg,
       optional long opt_arg,
       optional long opt_arg2 = 123,
-      optional long opt_arg2 = 123,
+      optional long opt_arg3 = 123,
+      optional DOMString opt_arg4 = "abc",
       long... el_arg);
 };
 

@@ -218,3 +218,8 @@ class IFloatValue(IValue):
 
 class INullValue(IValue):
   pass
+
+
+
+class IStringValue(IValue):
+  pass

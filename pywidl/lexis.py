@@ -73,7 +73,6 @@ t_ignore_line_comment = r'//.*'
 
 t_INTEGER = r"-?(0([0-7]*|[Xx][0-9A-Fa-f]+)|[1-9][0-9]*)"
 t_FLOAT = r"-?(([0-9]+\.[0-9]*|[0-9]*\.[0-9]+)([Ee][+-]?[0-9]+)?|[0-9]+[Ee][+-]?[0-9]+)"
-t_STRING = r"\"[^\"]*\""
 t_ELLIPSIS = r"\.\.\."
 
 
@@ -82,6 +81,13 @@ def t_IDENTIFIER(t):
   r"[A-Z_a-z][0-9A-Z_a-z]*"
   if t.value in keywords:
     t.type = t.value
+  return t
+
+
+
+def t_STRING(t):
+  r"\"[^\"]*\""
+  t.value = t.value[1:-1]
   return t
 
 

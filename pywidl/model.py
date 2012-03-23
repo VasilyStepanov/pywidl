@@ -198,3 +198,8 @@ class FloatValue(Value):
 
 class NullValue(Value):
   iface = INullValue
+
+
+
+class StringValue(Value):
+  iface = IStringValue

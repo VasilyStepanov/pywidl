@@ -141,11 +141,17 @@ def p_Default_empty(p):
 
 
 
-# 13 TODO
+# 13
 def p_DefaultValue(p):
-  """DefaultValue : ConstValue
-                  | STRING
-  """
+  """DefaultValue : ConstValue"""
+  p[0] = p[1]
+
+
+
+# 13
+def p_DefaultValue_string(p):
+  """DefaultValue : STRING"""
+  p[0] = model.StringValue(value=p[1])
 
 
 
@@ -766,7 +772,7 @@ def p_NonAnyType(p):
 
 
 
-# 58 TODO
+# 58
 def p_ConstType(p):
   """ConstType : PrimitiveType Null"""
   p[0] = p[1]

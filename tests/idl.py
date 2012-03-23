@@ -77,7 +77,7 @@ def emitArgument(argument):
     a = "optional %s" % a
 
   if argument.default:
-    a = "%s=%s" % a, argument.default
+    a = "%s=%s" % (a, emitValue(argument.default))
 
   return a
 
@@ -169,6 +169,8 @@ def emitValue(value):
     return value.value
   if isinstance(value, pywidl.NullValue):
     return "null"
+  if isinstance(value, pywidl.StringValue):
+    return "\"%s\"" % value.value
   else:
     return "/* unknown value type %s */" % value
 
