@@ -227,10 +227,11 @@ def p_ImplementsStatement(p):
 
 
 
-# 23 TODO
+# 23
 def p_Const(p):
   """Const : const ConstType IDENTIFIER "=" ConstValue ";"
   """
+  p[0] = model.Const(type=p[2], name=p[3], value=p[5])
 
 
 
@@ -751,6 +752,8 @@ def p_NonAnyType(p):
 # 58 TODO
 def p_ConstType(p):
   """ConstType : PrimitiveType Null"""
+  p[0] = p[1]
+  p[0].nullable = p[2]
 
 
 

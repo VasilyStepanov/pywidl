@@ -160,11 +160,19 @@ def renderOperation(out, operation):
 
 
 
+def renderConst(out, const):
+  print >>out, "  const %s %s = %s;" % ( \
+    emitType(const.type), const.name, const.value)
+
+
+
 def renderInterfaceMember(out, member):
   if isinstance(member, pywidl.Attribute):
     renderAttribute(out, member)
   elif isinstance(member, pywidl.Operation):
     renderOperation(out, member)
+  elif isinstance(member, pywidl.Const):
+    renderConst(out, member)
   else:
     print >>out, "  /* unknown interface member %s */" % type(member)
 

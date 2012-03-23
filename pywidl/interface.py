@@ -185,3 +185,11 @@ class IOperation(IPyWIdlObject):
   creator = False
   deleter = False
   legacycaller = False
+
+
+
+class IConst(IInterfaceMember):
+  name = None
+  type = None
+  value = None
+  extended_attributes = []

@@ -168,3 +168,8 @@ class Argument(PyWIdlObject):
 
 class Operation(PyWIdlObject):
   iface = IOperation
+
+
+
+class Const(InterfaceMember):
+  iface = IConst

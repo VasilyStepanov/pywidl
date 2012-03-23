@@ -67,3 +67,18 @@ interface Operation {
       optional long opt_arg2 = 123,
       long... el_arg);
 };
+
+
+
+interface Const {
+  const long _long = 1;
+  const long? _nulllong = null;
+  const boolean _b1 = true;
+  const boolean _b2 = false;
+  const float _f = 1.23;
+  [Replaceable,
+   Constructor(float x, float y),
+   NamedConstructor=Image(DOMString src),
+   PutForwards=name]
+  const long _ea = 123;
+};
