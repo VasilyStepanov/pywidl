@@ -17,7 +17,6 @@ interface Type {
   attribute object _object;
   attribute date _date;
   attribute any _any;
-
   attribute (Node or (Date or Event) or (XMLHttpRequest or DOMString)? or (float[] or NodeList)[] or any[]?[]) _union;
 };
 
@@ -60,14 +59,7 @@ interface Operation {
   void();
   long operation();
   static long operation();
-  getter setter creator deleter legacycaller long operation(
-      long arg,
-      [Replaceable]long ext_arg,
-      optional long opt_arg,
-      optional long opt_arg2 = 123,
-      optional long opt_arg3 = 123,
-      optional DOMString opt_arg4 = "abc",
-      long... el_arg);
+  getter setter creator deleter legacycaller long operation(long arg, [Replaceable] long ext_arg, optional long opt_arg, optional long opt_arg2=123, optional long opt_arg3=123, optional DOMString opt_arg4="abc", long... el_arg);
   stringifier long soperation();
 };
 
