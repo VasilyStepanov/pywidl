@@ -220,6 +220,21 @@ def renderImplementsStatement(out, implements):
 
 
 
+def renderTypedef(out, typedef):
+  t = "%s %s" % (emitType(typedef.type), typedef.name)
+
+  if typedef.type_extended_attributes: t = "%s %s" % ( \
+    emitExtendedAttributes("", typedef.type_extended_attributes), t)
+
+  t = "typedef %s" % t
+
+  if typedef.extended_attributes: t = "%s %s" % ( \
+    emitExtendedAttributes("", typedef.extended_attributes), t)
+
+  print >>out, "%s;" % t
+
+
+
 def renderDefinition(out, definition):
   print >>out
   print >>out
@@ -229,6 +244,8 @@ def renderDefinition(out, definition):
     renderInterface(out, definition)
   elif isinstance(definition, pywidl.ImplementsStatement):
     renderImplementsStatement(out, definition)
+  elif isinstance(definition, pywidl.Typedef):
+    renderTypedef(out, definition)
   else:
     print >>out, "/* unknown definition type %s */" % type(definition)
 

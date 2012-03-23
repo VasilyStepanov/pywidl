@@ -81,3 +81,7 @@ interface Const {
 
 
 Interface implements Functionality;
+
+
+
+[WTF] typedef [Clamp] octet Value;

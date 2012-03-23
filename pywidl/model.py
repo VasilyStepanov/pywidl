@@ -381,3 +381,13 @@ class ImplementsStatement(Definition):
     super(ImplementsStatement, self).__init__(**kwargs)
     self.interface = interface
     self.functionality = functionality
+
+
+
+class Typedef(Definition):
+
+  def __init__(self, type_extended_attributes=[], type=None, **kwargs):
+
+    super(Typedef, self).__init__(**kwargs)
+    self.type = type
+    self.type_extended_attributes= type_extended_attributes
