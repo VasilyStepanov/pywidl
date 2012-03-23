@@ -918,7 +918,7 @@ def p_ExtendedAttributeArgList(p):
   """ExtendedAttributeArgList : IDENTIFIER "(" ArgumentList ")"
   """
   p[0] = model.ExtendedAttribute(
-    value=model.ExtendedAttributeValue(name=p[1], value=p[3]))
+    value=model.ExtendedAttributeValue(name=p[1], arguments=p[3]))
 
 
 
@@ -937,7 +937,7 @@ def p_ExtendedAttributeNamedArgList(p):
   """
   p[0] = model.ExtendedAttribute(
     name=p[1],
-    value=model.ExtendedAttributeValue(name=p[3], value=p[5]))
+    value=model.ExtendedAttributeValue(name=p[3], arguments=p[5]))
 
 
 

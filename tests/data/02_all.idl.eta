@@ -48,13 +48,13 @@ interface TypeSpecifier {
 
 
 [Replaceable,
- Constructor,
- NamedConstructor=Image,
+ Constructor(float x, float y),
+ NamedConstructor=Image(DOMString src),
  PutForwards=name]
 interface InterfaceWAttributes {
   [Replaceable,
-   Constructor,
-   NamedConstructor=Image,
+   Constructor(float x, float y),
+   NamedConstructor=Image(DOMString src),
    PutForwards=name]
   attribute long _long;
 };
