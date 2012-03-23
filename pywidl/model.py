@@ -371,3 +371,13 @@ class NullValue(Value):
 
 class StringValue(Value):
   pass
+
+
+
+class ImplementsStatement(Definition):
+
+  def __init__(self, interface=None, functionality=None, **kwargs):
+
+    super(ImplementsStatement, self).__init__(**kwargs)
+    self.interface = interface
+    self.functionality = functionality

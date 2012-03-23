@@ -226,10 +226,11 @@ def p_Typedef(p):
 
 
 
-# 22 TODO
+# 22
 def p_ImplementsStatement(p):
   """ImplementsStatement : IDENTIFIER implements IDENTIFIER ";"
   """
+  p[0] = model.ImplementsStatement(interface=p[1], functionality=p[3])
 
 
 

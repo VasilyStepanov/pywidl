@@ -213,7 +213,13 @@ def renderInterface(out, interface):
   print >>out, "};"
 
 
-  
+
+def renderImplementsStatement(out, implements):
+  print >>out, "%s implements %s;" % ( \
+    implements.interface, implements.functionality)
+
+
+
 def renderDefinition(out, definition):
   print >>out
   print >>out
@@ -221,6 +227,8 @@ def renderDefinition(out, definition):
 
   if isinstance(definition, pywidl.Interface):
     renderInterface(out, definition)
+  elif isinstance(definition, pywidl.ImplementsStatement):
+    renderImplementsStatement(out, definition)
   else:
     print >>out, "/* unknown definition type %s */" % type(definition)
 

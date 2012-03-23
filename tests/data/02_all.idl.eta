@@ -84,3 +84,7 @@ interface Const {
    PutForwards=name]
   const long _ea = 123;
 };
+
+
+
+Interface implements Functionality;
