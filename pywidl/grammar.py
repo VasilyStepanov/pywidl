@@ -291,20 +291,22 @@ def p_AttributeOrOperation(p):
 
 
 
-# 26 TODO
+# 26
 def p_AttributeOrOperation_stringifier(p):
   """AttributeOrOperation : stringifier StringifierAttributeOrOperation
   """
   p[0] = p[2]
+  p[0].stringifier = True
 
 
 
-# 27 TODO
+# 27
 def p_StringifierAttributeOrOperation(p):
   """StringifierAttributeOrOperation : Attribute
                                      | OperationRest
                                      | ";"
   """
+  p[0] = p[1]
 
 
 

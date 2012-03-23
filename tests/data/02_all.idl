@@ -37,6 +37,7 @@ interface TypeSpecifier {
   inherit attribute long _inh;
   readonly attribute long _ro;
   inherit readonly attribute long _inhro;
+  stringifier inherit readonly attribute long _sinhro;
 };
 
 
@@ -67,6 +68,7 @@ interface Operation {
       optional long opt_arg3 = 123,
       optional DOMString opt_arg4 = "abc",
       long... el_arg);
+  stringifier long soperation();
 };
 
 

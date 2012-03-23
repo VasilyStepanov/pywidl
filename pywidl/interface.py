@@ -23,6 +23,7 @@ class IInterfaceMember(IPyWIdlObject):
 
 
 class IAttribute(IInterfaceMember):
+  stringifier = False
   inherit = False
   readonly = False
   type = None
@@ -175,6 +176,7 @@ class IArgument(IPyWIdlObject):
 
 
 class IOperation(IPyWIdlObject):
+  stringifier = False
   name = None
   return_type = None
   arguments = []

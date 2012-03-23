@@ -43,6 +43,7 @@ interface TypeSpecifier {
   inherit attribute long _inh;
   readonly attribute long _ro;
   inherit readonly attribute long _inhro;
+  stringifier inherit readonly attribute long _sinhro;
 };
 
 
@@ -66,6 +67,7 @@ interface Operation {
   long operation();
   static long operation();
   getter setter creator deleter legacycaller long operation(long arg, [Replaceable] long ext_arg, optional long opt_arg, optional long opt_arg2=123, optional long opt_arg3=123, optional DOMString opt_arg4="abc", long... el_arg);
+  stringifier long soperation();
 };
 
 

@@ -128,6 +128,7 @@ def renderAttribute(out, attribute):
   specifier = "attribute"
   if attribute.readonly: specifier = "readonly %s" % specifier
   if attribute.inherit: specifier = "inherit %s" % specifier
+  if attribute.stringifier: specifier = "stringifier %s" % specifier
 
 
   renderExtendedAttributes(out, "  ", attribute.extended_attributes)
@@ -141,6 +142,7 @@ def renderAttribute(out, attribute):
 
 def renderOperation(out, operation):
   qualifiers = []
+  if operation.stringifier: qualifiers.append("stringifier")
   if operation.static: qualifiers.append("static")
   if operation.getter: qualifiers.append("getter")
   if operation.setter: qualifiers.append("setter")
