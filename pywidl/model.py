@@ -1,205 +1,373 @@
 # -*- coding: UTF-8 -*-
 
-from core import PyWIdlObject
-from interface import *
+
+
+class PyWIdlObject(object):
+  pass
 
 
 
 class Definition(PyWIdlObject):
-  iface = IDefinition
+
+  def __init__(self, name=None, extended_attributes=[], **kwargs):
+
+    super(Definition, self).__init__(**kwargs)
+    self.name = name
+    self.extended_attributes = extended_attributes
 
 
 
 class Interface(Definition):
-  iface = IInterface
+
+  def __init__(self, parent=None, members=[], **kwargs):
+
+    super(Interface, self).__init__(**kwargs)
+    self.parent = parent
+    self.members = members
 
 
 
 class InterfaceMember(PyWIdlObject):
-  iface = IInterfaceMember
+
+  def __init__(self, name=None, extended_attributes=[], **kwargs):
+
+    super(InterfaceMember, self).__init__(**kwargs)
+    self.name = name
+    self.extended_attributes = extended_attributes
 
 
 
 class Attribute(InterfaceMember):
-  iface = IAttribute
+
+  def __init__(self, stringifier=False, inherit=False, readonly=False,
+    type=None, **kwargs):
+
+    super(Attribute, self).__init__(**kwargs)
+    self.stringifier = stringifier
+    self.inherit = inherit
+    self.readonly = readonly
+    self.type = type
 
 
 
 class Type(PyWIdlObject):
-  iface = IType
+
+  def __init__(self, name=None, nullable=False, **kwargs):
+
+    super(Type, self).__init__(**kwargs)
+    self.name = name
+    self.nullable = nullable
 
 
 
 class SingleType(Type):
-  iface = ISingleType
+
+  def __init__(self, **kwargs):
+
+    super(SingleType, self).__init__(**kwargs)
 
 
 
 class PrimitiveType(SingleType):
-  iface = IPrimitiveType
+
+  def __init__(self, **kwargs):
+
+    super(PrimitiveType, self).__init__(**kwargs)
 
 
 
 class IntegerType(PrimitiveType):
-  iface = IIntegerType
-  unsigned = False
+
+  def __init__(self, **kwargs):
+
+    super(IntegerType, self).__init__(**kwargs)
 
 
 
 class Short(IntegerType):
-  iface = IShort
+
+  def __init__(self, **kwargs):
+
+    super(Short, self).__init__(**kwargs)
+    self.name = "Short"
 
 
 
 class UnsignedShort(IntegerType):
-  iface = IUnsignedShort
+
+  def __init__(self, **kwargs):
+
+    super(UnsignedShort, self).__init__(**kwargs)
+    self.name = "UnsignedShort"
 
 
 
 class Long(IntegerType):
-  iface = ILong
+
+  def __init__(self, **kwargs):
+
+    super(Long, self).__init__(**kwargs)
+    self.name = "Long"
 
 
 
 class UnsignedLong(IntegerType):
-  iface = IUnsignedLong
+
+  def __init__(self, **kwargs):
+
+    super(UnsignedLong, self).__init__(**kwargs)
+    self.name = "UnsignedLong"
 
 
 
 class LongLong(IntegerType):
-  iface = ILongLong
+
+  def __init__(self, **kwargs):
+
+    super(LongLong, self).__init__(**kwargs)
+    self.name = "LongLong"
 
 
 
 class UnsignedLongLong(IntegerType):
-  iface = IUnsignedLongLong
+
+  def __init__(self, **kwargs):
+
+    super(UnsignedLongLong, self).__init__(**kwargs)
+    self.name = "UnsignedLongLong"
 
 
 
 class Boolean(PrimitiveType):
-  iface = IBoolean
+
+  def __init__(self, **kwargs):
+
+    super(Boolean, self).__init__(**kwargs)
+    self.name = "Boolean"
 
 
 
 class Byte(PrimitiveType):
-  iface = IByte
+
+  def __init__(self, **kwargs):
+
+    super(Byte, self).__init__(**kwargs)
+    self.name = "Byte"
 
 
 
 class Octet(PrimitiveType):
-  iface = IOctet
+
+  def __init__(self, **kwargs):
+
+    super(Octet, self).__init__(**kwargs)
+    self.name = "Octet"
 
 
 
 class Float(PrimitiveType):
-  iface = IFloat
+
+  def __init__(self, **kwargs):
+
+    super(Float, self).__init__(**kwargs)
+    self.name = "Float"
 
 
 
 class Double(PrimitiveType):
-  iface = IDouble
+
+  def __init__(self, **kwargs):
+
+    super(Double, self).__init__(**kwargs)
+    self.name = "Double"
 
 
 
 class DOMString(SingleType):
-  iface = IDOMString
+
+  def __init__(self, **kwargs):
+
+    super(DOMString, self).__init__(**kwargs)
+    self.name = "DOMString"
 
 
 
 class InterfaceType(SingleType):
-  iface = IInterfaceType
+
+  def __init__(self, **kwargs):
+
+    super(InterfaceType, self).__init__(**kwargs)
 
 
 
 class Sequence(SingleType):
-  iface = ISequence
+
+  def __init__(self, t=None, **kwargs):
+
+    super(Sequence, self).__init__(**kwargs)
+    self.name = "Sequence"
+    self.t = t
 
 
 
 class Object(SingleType):
-  iface = IObject
+
+  def __init__(self, **kwargs):
+
+    super(Object, self).__init__(**kwargs)
+    self.name = "Object"
 
 
 
 class Date(SingleType):
-  iface = IDate
+
+  def __init__(self, **kwargs):
+
+    super(Date, self).__init__(**kwargs)
+    self.name = "Date"
 
 
 
 class Any(Type):
-  iface = IAny
+
+  def __init__(self, **kwargs):
+
+    super(Any, self).__init__(**kwargs)
+    self.name = "Any"
 
 
 
 class Array(Type):
-  iface = IArray
+
+  def __init__(self, t=None, **kwargs):
+
+    super(Array, self).__init__(**kwargs)
+    self.name = "Array"
+    self.t = t
 
 
 
 class Void(Type):
-  iface = IVoid
+
+  def __init__(self, **kwargs):
+
+    super(Void, self).__init__(**kwargs)
 
 
 
 class UnionType(Type):
-  iface = IUnionType
+
+  def __init__(self, t=[], **kwargs):
+
+    super(UnionType, self).__init__(**kwargs)
+    self.name = property(self._getName)
+    self.t = t
+
 
   def _getName(self):
     return " Or ".join([t.name for t in self.t])
 
-  name = property(_getName)
-
 
 
 class ExtendedAttribute(PyWIdlObject):
-  iface = IExtendedAttribute
+
+  def __init__(self, name=None, value=None, **kwargs):
+
+    super(ExtendedAttribute, self).__init__(**kwargs)
+    self.name = name
+    self.value = value
 
 
 
 class ExtendedAttributeValue(PyWIdlObject):
-  iface = IExtendedAttributeValue
+
+  def __init__(self, name=None, arguments=[], **kwargs):
+
+    super(ExtendedAttributeValue, self).__init__(**kwargs)
+    self.name = name
+    self.arguments = arguments
+
 
 
 
 class Argument(PyWIdlObject):
-  iface = IArgument
+
+  def __init__(self, type=None, name=None, optional=False, default=None,
+    ellipsis=False, extended_attributes=[], **kwargs):
+
+    super(Argument, self).__init__(**kwargs)
+    self.type = type
+    self.name = name
+    self.optional = optional
+    self.default = default
+    self.ellipsis = ellipsis
+    self.extended_attributes = extended_attributes
 
 
 
 class Operation(PyWIdlObject):
-  iface = IOperation
+
+  def __init__(self, stringifier=None, name=None, return_type=None,
+    arguments=[], extended_attributes=[], static=False, getter=False,
+    setter=False, creator=False, deleter=False, legacycaller=False,
+    **kwargs):
+
+    super(Operation, self).__init__(**kwargs)
+    self.stringifier = stringifier
+    self.name = name
+    self.return_type = return_type
+    self.arguments = arguments
+    self.extended_attributes = extended_attributes
+    self.static = static
+    self.getter = getter
+    self.setter = setter
+    self.creator = creator
+    self.deleter = deleter
+    self.legacycaller = legacycaller
 
 
 
 class Const(InterfaceMember):
-  iface = IConst
+
+  def __init__(self, name=None, type=None, value=None, extended_attributes=[],
+    **kwargs):
+
+    super(Const, self).__init__(**kwargs)
+    self.name = name
+    self.type = type
+    self.value = value
+    self.extended_attributes = extended_attributes
 
 
 
 class Value(PyWIdlObject):
-  iface = IValue
+
+  def __init__(self, value=None, **kwargs):
+
+    super(Value, self).__init__(**kwargs)
+    self.value = value
 
 
 
 class BooleanValue(Value):
-  iface = IBooleanValue
+  pass
 
 
 
 class IntegerValue(Value):
-  iface = IIntegerValue
+  pass
 
 
 
 class FloatValue(Value):
-  iface = IFloatValue
+  pass
 
 
 
 class NullValue(Value):
-  iface = INullValue
+  pass
 
 
 
 class StringValue(Value):
-  iface = IStringValue
+  pass
