@@ -36,9 +36,9 @@ setup(
   keywords = "webidl",
   url = "https://github.com/VasilyStepanov/pywidl",
   packages = ["pywidl", "tests"],
-  long_description = read("README"),
+  long_description = read("README.md"),
   classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 3 - Alpha",
     "Topic :: Software Development :: Code Generators",
     "License :: OSI Approved :: MIT License",
   ],
