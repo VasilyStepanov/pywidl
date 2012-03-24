@@ -54,9 +54,10 @@ def p_CallbackOrInterface_interface(p):
 
 
 
-# 4 TODO
+# 4
 def p_CallbackRestOrInterface(p):
   """CallbackRestOrInterface : CallbackRest"""
+  p[0] = p[1]
 
 
 
@@ -225,10 +226,11 @@ def p_EnumValues(p):
 
 
 
-# 20 TODO
+# 20
 def p_CallbackRest(p):
   """CallbackRest : IDENTIFIER "=" ReturnType "(" ArgumentList ")" ";"
   """
+  p[0] = model.Callback(name=p[1], return_type=p[3], arguments=p[5])
 
 
 

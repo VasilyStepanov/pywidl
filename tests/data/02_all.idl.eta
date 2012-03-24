@@ -113,8 +113,14 @@ partial interface Type {
 
 
 
+[Replaceable]
 callback interface CallbackInterface {
   attribute DOMString? option1;
   attribute DOMString? option2;
   attribute long? option3;
 };
+
+
+
+[Replaceable]
+callback AsyncOperationCallback = void (DOMString status);

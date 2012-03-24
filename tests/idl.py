@@ -274,6 +274,15 @@ def renderDictionary(out, dictionary):
 
 
 
+def renderCallback(out, callback):
+  arguments = callback.arguments;
+
+  renderExtendedAttributes(out, "", callback.extended_attributes)
+  print >>out, "callback %s = %s (%s);" % ( \
+    callback.name, emitType(callback.return_type), emitArguments(arguments))
+
+
+
 def renderDefinition(out, definition):
   print >>out
   print >>out
@@ -289,6 +298,8 @@ def renderDefinition(out, definition):
     renderTypedef(out, definition)
   elif isinstance(definition, pywidl.Dictionary):
     renderDictionary(out, definition)
+  elif isinstance(definition, pywidl.Callback):
+    renderCallback(out, definition)
   else:
     print >>out, "/* unknown definition type %s */" % type(definition)
 

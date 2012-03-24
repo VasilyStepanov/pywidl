@@ -418,3 +418,13 @@ class DictionaryMember(PyWIdlObject):
     self.name = name
     self.default = default
     self.extended_attributes = extended_attributes
+
+
+
+class Callback(Definition):
+  
+  def __init__(self, return_type=None, arguments=[], **kwargs):
+
+    super(Callback, self).__init__(**kwargs)
+    self.return_type = return_type
+    self.arguments = arguments
