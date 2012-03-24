@@ -140,6 +140,15 @@ def renderAttribute(out, attribute):
 
 
 
+def renderExceptionField(out, field):
+  renderExtendedAttributes(out, "  ", field.extended_attributes)
+  print >>out, "  %(type)s %(name)s;" % {
+      "type" : emitType(field.type),
+      "name" : field.name,
+    }
+
+
+
 def renderOperation(out, operation):
   qualifiers = []
   if operation.stringifier: qualifiers.append("stringifier")
@@ -192,6 +201,8 @@ def renderInterfaceMember(out, member):
     renderOperation(out, member)
   elif isinstance(member, pywidl.Const):
     renderConst(out, member)
+  elif isinstance(member, pywidl.ExceptionField):
+    renderExceptionField(out, member)
   else:
     print >>out, "  /* unknown interface member %s */" % type(member)
 
@@ -235,6 +246,22 @@ def renderPartialInterface(out, interface):
   print >>out, "partial interface %s {" % interface.name
 
   for member in interface.members:
+    renderInterfaceMember(out, member)
+
+  print >>out, "};"
+
+
+
+def renderException(out, exception):
+  if exception.parent:
+    declaration = "%s : %s" % (exception.name, exception.parent)
+  else:
+    declaration = "%s" % exception.name
+
+  renderExtendedAttributes(out, "", exception.extended_attributes)
+  print >>out, "exception %s {" % declaration
+
+  for member in exception.members:
     renderInterfaceMember(out, member)
 
   print >>out, "};"
@@ -310,6 +337,8 @@ def renderDefinition(out, definition):
     renderCallback(out, definition)
   elif isinstance(definition, pywidl.Enum):
     renderEnum(out, definition)
+  elif isinstance(definition, pywidl.Exception):
+    renderException(out, definition)
   else:
     print >>out, "/* unknown definition type %s */" % type(definition)
 

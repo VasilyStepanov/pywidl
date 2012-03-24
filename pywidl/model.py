@@ -437,3 +437,22 @@ class Enum(Definition):
 
     super(Enum, self).__init__(**kwargs)
     self.values = values
+
+
+
+class Exception(Definition):
+
+  def __init__(self, parent=None, members=[], **kwargs):
+
+    super(Exception, self).__init__(**kwargs)
+    self.parent = parent
+    self.members = members
+
+
+
+class ExceptionField(InterfaceMember):
+
+  def __init__(self, type=None, **kwargs):
+
+    super(ExceptionField, self).__init__(**kwargs)
+    self.type = type

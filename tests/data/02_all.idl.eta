@@ -129,3 +129,14 @@ callback AsyncOperationCallback = void (DOMString status);
 
 [Replaceable]
 enum MealType { "rice", "noodles", "other" };
+
+
+
+[Replaceable]
+exception DOMException {
+  const unsigned short INDEX_SIZE_ERR = 1;
+  const unsigned short DOMSTRING_SIZE_ERR = 2;
+  [Clamp]
+  const unsigned short HIERARCHY_REQUEST_ERR = 3;
+  unsigned short code;
+};

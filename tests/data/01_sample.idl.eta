@@ -5,7 +5,9 @@
 
 
 
-/* unknown definition type <type 'NoneType'> */
+exception GraphicsException {
+  DOMString reason;
+};
 
 
 

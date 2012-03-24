@@ -10,11 +10,10 @@ import os
 
 
 
-# 1 TODO
+# 1
 def p_Definitions(p):
   """Definitions : Definitions ExtendedAttributeList Definition"""
-  if p[3]:
-    p[3].extended_attributes = p[2]
+  p[3].extended_attributes = p[2]
   p[0] = p[1] + [p[3]]
 
 
@@ -176,18 +175,26 @@ def p_DefaultValue_empty(p):
 
 
 
-# 14 TODO
+# 14
 def p_Exception(p):
   """Exception : exception IDENTIFIER Inheritance "{" ExceptionMembers "}" ";"
   """
+  p[0] = model.Exception(name=p[2], parent=p[3], members=p[5])
 
 
 
-# 15 TODO
+# 15
 def p_ExceptionMembers(p):
-  """ExceptionMembers : ExtendedAttributeList ExceptionMember ExceptionMembers
-                      |
-  """
+  """ExceptionMembers : ExtendedAttributeList ExceptionMember ExceptionMembers"""
+  p[2].extended_attributes = p[1]
+  p[0] = [p[2]] + p[3]
+
+
+
+# 15
+def p_ExceptionMembers_empty(p):
+  """ExceptionMembers : """
+  p[0] = []
 
 
 
@@ -535,18 +542,20 @@ def p_Ellipsis_false(p):
 
 
 
-# 43 TODO
+# 43
 def p_ExceptionMember(p):
   """ExceptionMember : Const
                      | ExceptionField
   """
+  p[0] = p[1]
 
 
 
-# 44 TODO
+# 44
 def p_ExceptionField(p):
   """ExceptionField : Type IDENTIFIER ";"
   """
+  p[0] = model.ExceptionField(type=p[1], name=p[2])
 
 
 
