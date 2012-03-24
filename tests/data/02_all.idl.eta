@@ -103,3 +103,10 @@ dictionary B : A {
   long b;
   long c=123;
 };
+
+
+
+[Replaceable]
+partial interface Type {
+  attribute long a;
+};

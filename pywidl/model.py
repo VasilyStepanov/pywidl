@@ -27,6 +27,15 @@ class Interface(Definition):
 
 
 
+class PartialInterface(Definition):
+
+  def __init__(self, members=[], **kwargs):
+
+    super(PartialInterface, self).__init__(**kwargs)
+    self.members = members
+
+
+
 class InterfaceMember(PyWIdlObject):
 
   def __init__(self, name=None, extended_attributes=[], **kwargs):

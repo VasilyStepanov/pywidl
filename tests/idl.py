@@ -226,6 +226,17 @@ def renderInterface(out, interface):
 
 
 
+def renderPartialInterface(out, interface):
+  renderExtendedAttributes(out, "", interface.extended_attributes)
+  print >>out, "partial interface %s {" % interface.name
+
+  for member in interface.members:
+    renderInterfaceMember(out, member)
+
+  print >>out, "};"
+
+
+
 def renderImplementsStatement(out, implements):
   print >>out, "%s implements %s;" % ( \
     implements.interface, implements.functionality)
@@ -264,7 +275,9 @@ def renderDefinition(out, definition):
   print >>out
   print >>out
 
-  if isinstance(definition, pywidl.Interface):
+  if isinstance(definition, pywidl.PartialInterface):
+    renderPartialInterface(out, definition)
+  elif isinstance(definition, pywidl.Interface):
     renderInterface(out, definition)
   elif isinstance(definition, pywidl.ImplementsStatement):
     renderImplementsStatement(out, definition)

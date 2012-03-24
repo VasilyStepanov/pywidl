@@ -69,10 +69,11 @@ def p_Interface(p):
 
 
 
-# 6 TODO
+# 6
 def p_PartialInterface(p):
   """PartialInterface : partial interface IDENTIFIER "{" InterfaceMembers "}" ";"
   """
+  p[0] = model.PartialInterface(name=p[3], members=p[5])
 
 
 
