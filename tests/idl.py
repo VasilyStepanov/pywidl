@@ -215,9 +215,13 @@ def renderInterface(out, interface):
   else:
     declaration = "%s" % interface.name
 
+  if interface.callback:
+    definition = "callback interface"
+  else:
+    definition = "interface"
 
   renderExtendedAttributes(out, "", interface.extended_attributes)
-  print >>out, "interface %s {" % declaration
+  print >>out, "%s %s {" % (definition, declaration)
 
   for member in interface.members:
     renderInterfaceMember(out, member)

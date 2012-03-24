@@ -40,9 +40,10 @@ def p_Definition(p):
 
 
 
-# 3 TODO
+# 3
 def p_CallbackOrInterface_callback(p):
   """CallbackOrInterface : callback CallbackRestOrInterface"""
+  p[0] = p[2]
 
 
 
@@ -55,9 +56,15 @@ def p_CallbackOrInterface_interface(p):
 
 # 4 TODO
 def p_CallbackRestOrInterface(p):
-  """CallbackRestOrInterface : CallbackRest
-                             | Interface
-  """
+  """CallbackRestOrInterface : CallbackRest"""
+
+
+
+# 4
+def p_CallbackRestOrInterface_interface(p):
+  """CallbackRestOrInterface : Interface"""
+  p[0] = p[1]
+  p[0].callback = True
 
 
 

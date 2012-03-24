@@ -19,9 +19,10 @@ class Definition(PyWIdlObject):
 
 class Interface(Definition):
 
-  def __init__(self, parent=None, members=[], **kwargs):
+  def __init__(self, callback=False, parent=None, members=[], **kwargs):
 
     super(Interface, self).__init__(**kwargs)
+    self.callback = callback
     self.parent = parent
     self.members = members
 
