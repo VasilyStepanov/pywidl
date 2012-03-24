@@ -7,16 +7,24 @@ from mako.template import Template
 
 import sys
 
+name = "pywidl"
+version = "0.0"
+
 
 def printUsage():
   print """USAGE: pywidl <options> source
 
   Options:
+    -v, --version
     -m, --mako
     -n, --native
     -o, --output FILE
     -t, --template FILE
 """
+
+
+def printVersion():
+  print "%s %s" % (name, version)
 
 
 
@@ -82,7 +90,10 @@ def main():
   i = 1
   while i < len(sys.argv):
     arg = sys.argv[i]
-    if arg == "-m" or arg == "--mako":
+    if arg == "-v" or arg == "--version":
+      printVersion()
+      return
+    elif arg == "-m" or arg == "--mako":
       template_type = App.MAKO_TEMPLATE
     elif arg == "-n" or arg == "--mako":
       template_type = App.NATIVE_TEMPLATE
