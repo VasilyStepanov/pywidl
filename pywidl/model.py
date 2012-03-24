@@ -428,3 +428,12 @@ class Callback(Definition):
     super(Callback, self).__init__(**kwargs)
     self.return_type = return_type
     self.arguments = arguments
+
+
+
+class Enum(Definition):
+
+  def __init__(self, values=[], **kwargs):
+
+    super(Enum, self).__init__(**kwargs)
+    self.values = values

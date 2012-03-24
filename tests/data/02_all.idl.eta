@@ -124,3 +124,8 @@ callback interface CallbackInterface {
 
 [Replaceable]
 callback AsyncOperationCallback = void (DOMString status);
+
+
+
+[Replaceable]
+enum MealType { "rice", "noodles", "other" };

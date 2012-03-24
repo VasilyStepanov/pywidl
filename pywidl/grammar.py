@@ -205,24 +205,32 @@ def p_Inheritance_empty(p):
 
 
 
-# 17 TODO
+# 17
 def p_Enum(p):
   """Enum : enum IDENTIFIER "{" EnumValueList "}" ";"
   """
+  p[0] = model.Enum(name=p[2], values=p[4])
 
 
 
-# 18 TODO
+# 18
 def p_EnumValueList(p):
   """EnumValueList : STRING EnumValues"""
+  p[0] = [p[1]] + p[2]
 
 
 
-# 19 TODO
+# 19
 def p_EnumValues(p):
-  """EnumValues : "," STRING EnumValues
-                |
-  """
+  """EnumValues : "," STRING EnumValues"""
+  p[0] = [p[2]] + p[3]
+
+
+
+# 19
+def p_EnumValues_empty(p):
+  """EnumValues : """
+  p[0] = []
 
 
 

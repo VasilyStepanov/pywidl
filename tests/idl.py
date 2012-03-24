@@ -283,6 +283,14 @@ def renderCallback(out, callback):
 
 
 
+def renderEnum(out, enum):
+  values = ", ".join(["\"%s\"" % value for value in enum.values])
+
+  renderExtendedAttributes(out, "", enum.extended_attributes)
+  print >>out, "enum %s { %s };" % (enum.name, values)
+
+
+
 def renderDefinition(out, definition):
   print >>out
   print >>out
@@ -300,6 +308,8 @@ def renderDefinition(out, definition):
     renderDictionary(out, definition)
   elif isinstance(definition, pywidl.Callback):
     renderCallback(out, definition)
+  elif isinstance(definition, pywidl.Enum):
+    renderEnum(out, definition)
   else:
     print >>out, "/* unknown definition type %s */" % type(definition)
 
