@@ -16,8 +16,8 @@ def printUsage():
 
   Options:
     -v, --version
-    -m, --mako
     -n, --native
+    -m, --mako
     -o, --output FILE
     -t, --template FILE
 """
