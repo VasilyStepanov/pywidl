@@ -2,12 +2,7 @@
 
 
 
-class PyWIdlObject(object):
-  pass
-
-
-
-class Definition(PyWIdlObject):
+class Definition(object):
 
   def __init__(self, name=None, extended_attributes=[], **kwargs):
 
@@ -37,7 +32,66 @@ class PartialInterface(Definition):
 
 
 
-class InterfaceMember(PyWIdlObject):
+class ImplementsStatement(Definition):
+
+  def __init__(self, interface=None, functionality=None, **kwargs):
+
+    super(ImplementsStatement, self).__init__(**kwargs)
+    self.interface = interface
+    self.functionality = functionality
+
+
+
+class Typedef(Definition):
+
+  def __init__(self, type_extended_attributes=[], type=None, **kwargs):
+
+    super(Typedef, self).__init__(**kwargs)
+    self.type = type
+    self.type_extended_attributes= type_extended_attributes
+
+
+
+class Dictionary(Definition):
+
+  def __init__(self, parent=None, members=[], **kwargs):
+
+    super(Dictionary, self).__init__(**kwargs)
+    self.parent = parent
+    self.members = members
+
+
+
+class Callback(Definition):
+  
+  def __init__(self, return_type=None, arguments=[], **kwargs):
+
+    super(Callback, self).__init__(**kwargs)
+    self.return_type = return_type
+    self.arguments = arguments
+
+
+
+class Enum(Definition):
+
+  def __init__(self, values=[], **kwargs):
+
+    super(Enum, self).__init__(**kwargs)
+    self.values = values
+
+
+
+class Exception(Definition):
+
+  def __init__(self, parent=None, members=[], **kwargs):
+
+    super(Exception, self).__init__(**kwargs)
+    self.parent = parent
+    self.members = members
+
+
+
+class InterfaceMember(object):
 
   def __init__(self, name=None, extended_attributes=[], **kwargs):
 
@@ -60,7 +114,26 @@ class Attribute(InterfaceMember):
 
 
 
-class Type(PyWIdlObject):
+class ExceptionField(InterfaceMember):
+
+  def __init__(self, type=None, **kwargs):
+
+    super(ExceptionField, self).__init__(**kwargs)
+    self.type = type
+
+
+
+class Const(InterfaceMember):
+
+  def __init__(self, type=None, value=None, **kwargs):
+
+    super(Const, self).__init__(**kwargs)
+    self.type = type
+    self.value = value
+
+
+
+class Type(object):
 
   def __init__(self, name=None, nullable=False, **kwargs):
 
@@ -83,6 +156,51 @@ class PrimitiveType(SingleType):
   def __init__(self, **kwargs):
 
     super(PrimitiveType, self).__init__(**kwargs)
+
+
+
+class Boolean(PrimitiveType):
+
+  def __init__(self, **kwargs):
+
+    super(Boolean, self).__init__(**kwargs)
+    self.name = "Boolean"
+
+
+
+class Byte(PrimitiveType):
+
+  def __init__(self, **kwargs):
+
+    super(Byte, self).__init__(**kwargs)
+    self.name = "Byte"
+
+
+
+class Octet(PrimitiveType):
+
+  def __init__(self, **kwargs):
+
+    super(Octet, self).__init__(**kwargs)
+    self.name = "Octet"
+
+
+
+class Float(PrimitiveType):
+
+  def __init__(self, **kwargs):
+
+    super(Float, self).__init__(**kwargs)
+    self.name = "Float"
+
+
+
+class Double(PrimitiveType):
+
+  def __init__(self, **kwargs):
+
+    super(Double, self).__init__(**kwargs)
+    self.name = "Double"
 
 
 
@@ -148,51 +266,6 @@ class UnsignedLongLong(IntegerType):
 
 
 
-class Boolean(PrimitiveType):
-
-  def __init__(self, **kwargs):
-
-    super(Boolean, self).__init__(**kwargs)
-    self.name = "Boolean"
-
-
-
-class Byte(PrimitiveType):
-
-  def __init__(self, **kwargs):
-
-    super(Byte, self).__init__(**kwargs)
-    self.name = "Byte"
-
-
-
-class Octet(PrimitiveType):
-
-  def __init__(self, **kwargs):
-
-    super(Octet, self).__init__(**kwargs)
-    self.name = "Octet"
-
-
-
-class Float(PrimitiveType):
-
-  def __init__(self, **kwargs):
-
-    super(Float, self).__init__(**kwargs)
-    self.name = "Float"
-
-
-
-class Double(PrimitiveType):
-
-  def __init__(self, **kwargs):
-
-    super(Double, self).__init__(**kwargs)
-    self.name = "Double"
-
-
-
 class DOMString(SingleType):
 
   def __init__(self, **kwargs):
@@ -238,15 +311,6 @@ class Date(SingleType):
 
 
 
-class Any(Type):
-
-  def __init__(self, **kwargs):
-
-    super(Any, self).__init__(**kwargs)
-    self.name = "Any"
-
-
-
 class Array(Type):
 
   def __init__(self, t=None, **kwargs):
@@ -276,7 +340,16 @@ class UnionType(Type):
 
 
 
-class ExtendedAttribute(PyWIdlObject):
+class Any(Type):
+
+  def __init__(self, **kwargs):
+
+    super(Any, self).__init__(**kwargs)
+    self.name = "Any"
+
+
+
+class ExtendedAttribute(object):
 
   def __init__(self, name=None, value=None, **kwargs):
 
@@ -286,7 +359,7 @@ class ExtendedAttribute(PyWIdlObject):
 
 
 
-class ExtendedAttributeValue(PyWIdlObject):
+class ExtendedAttributeValue(object):
 
   def __init__(self, name=None, arguments=[], **kwargs):
 
@@ -296,8 +369,7 @@ class ExtendedAttributeValue(PyWIdlObject):
 
 
 
-
-class Argument(PyWIdlObject):
+class Argument(object):
 
   def __init__(self, type=None, name=None, optional=False, default=None,
     ellipsis=False, extended_attributes=[], **kwargs):
@@ -312,7 +384,7 @@ class Argument(PyWIdlObject):
 
 
 
-class Operation(PyWIdlObject):
+class Operation(object):
 
   def __init__(self, stringifier=None, name=None, return_type=None,
     arguments=[], extended_attributes=[], static=False, getter=False,
@@ -334,17 +406,7 @@ class Operation(PyWIdlObject):
 
 
 
-class Const(InterfaceMember):
-
-  def __init__(self, type=None, value=None, **kwargs):
-
-    super(Const, self).__init__(**kwargs)
-    self.type = type
-    self.value = value
-
-
-
-class Value(PyWIdlObject):
+class Value(object):
 
   def __init__(self, value=None, **kwargs):
 
@@ -378,37 +440,7 @@ class StringValue(Value):
 
 
 
-class ImplementsStatement(Definition):
-
-  def __init__(self, interface=None, functionality=None, **kwargs):
-
-    super(ImplementsStatement, self).__init__(**kwargs)
-    self.interface = interface
-    self.functionality = functionality
-
-
-
-class Typedef(Definition):
-
-  def __init__(self, type_extended_attributes=[], type=None, **kwargs):
-
-    super(Typedef, self).__init__(**kwargs)
-    self.type = type
-    self.type_extended_attributes= type_extended_attributes
-
-
-
-class Dictionary(Definition):
-
-  def __init__(self, parent=None, members=[], **kwargs):
-
-    super(Dictionary, self).__init__(**kwargs)
-    self.parent = parent
-    self.members = members
-
-
-
-class DictionaryMember(PyWIdlObject):
+class DictionaryMember(object):
 
   def __init__(self, type=None, name=None, default=None,
     extended_attributes=[], **kwargs):
@@ -418,41 +450,3 @@ class DictionaryMember(PyWIdlObject):
     self.name = name
     self.default = default
     self.extended_attributes = extended_attributes
-
-
-
-class Callback(Definition):
-  
-  def __init__(self, return_type=None, arguments=[], **kwargs):
-
-    super(Callback, self).__init__(**kwargs)
-    self.return_type = return_type
-    self.arguments = arguments
-
-
-
-class Enum(Definition):
-
-  def __init__(self, values=[], **kwargs):
-
-    super(Enum, self).__init__(**kwargs)
-    self.values = values
-
-
-
-class Exception(Definition):
-
-  def __init__(self, parent=None, members=[], **kwargs):
-
-    super(Exception, self).__init__(**kwargs)
-    self.parent = parent
-    self.members = members
-
-
-
-class ExceptionField(InterfaceMember):
-
-  def __init__(self, type=None, **kwargs):
-
-    super(ExceptionField, self).__init__(**kwargs)
-    self.type = type
