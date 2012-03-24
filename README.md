@@ -3,7 +3,8 @@ PyWIdl
 
 Generic code generator from WebIDL interfaces.
 
-pywidl parses WebIDL code using PLY, builds interface object model and emits whatever code using user's mako templates.
+pywidl parses WebIDL code using PLY, builds the interface object model and emits
+whatever code using user's mako templates or even user's native python module.
 
 
 WebIDL object model
