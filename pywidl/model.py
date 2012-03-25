@@ -40,10 +40,6 @@
 #   UnsignedLongLong
 #   UnionType
 # Value
-#   BooleanValue
-#   IntegerValue
-#   FloatValue
-#   StringValue
 
 
 
@@ -438,33 +434,14 @@ class UnionType(Type):
 
 
 class Value(object):
+  BOOLEAN = 0
+  INTEGER = 1
+  FLOAT = 2
+  NULL = 3
+  STRING = 4
 
-  def __init__(self, value=None, **kwargs):
+  def __init__(self, type=None, value=None, **kwargs):
 
     super(Value, self).__init__(**kwargs)
+    self.type = type
     self.value = value
-
-
-
-class BooleanValue(Value):
-  pass
-
-
-
-class IntegerValue(Value):
-  pass
-
-
-
-class FloatValue(Value):
-  pass
-
-
-
-class NullValue(Value):
-  pass
-
-
-
-class StringValue(Value):
-  pass

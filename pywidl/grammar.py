@@ -164,7 +164,7 @@ def p_DefaultValue(p):
 # 13
 def p_DefaultValue_string(p):
   """DefaultValue : STRING"""
-  p[0] = model.StringValue(value=p[1])
+  p[0] = model.Value(type=model.Value.STRING, value=p[1])
 
 
 
@@ -276,28 +276,28 @@ def p_Const(p):
 # 24
 def p_ConstValue_boolean(p):
   """ConstValue : BooleanLiteral"""
-  p[0] = model.BooleanValue(value=p[1])
+  p[0] = model.Value(type=model.Value.BOOLEAN, value=p[1])
 
 
 
 # 24
 def p_ConstValue_integer(p):
   """ConstValue : INTEGER"""
-  p[0] = model.IntegerValue(value=p[1])
+  p[0] = model.Value(type=model.Value.INTEGER, value=p[1])
 
 
 
 # 24
 def p_ConstValue_float(p):
   """ConstValue : FLOAT"""
-  p[0] = model.FloatValue(value=p[1])
+  p[0] = model.Value(type=model.Value.FLOAT, value=p[1])
 
 
 
 # 24
 def p_ConstValue_null(p):
   """ConstValue : null"""
-  p[0] = model.NullValue(value=p[1])
+  p[0] = model.Value(type=model.Value.NULL, value=p[1])
 
 
 # 25

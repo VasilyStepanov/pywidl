@@ -172,15 +172,15 @@ def renderOperation(out, operation):
 
 
 def emitValue(value):
-  if isinstance(value, pywidl.BooleanValue):
+  if value.type == pywidl.Value.BOOLEAN:
     return value.value and "true" or "false"
-  if isinstance(value, pywidl.IntegerValue):
+  if value.type == pywidl.Value.INTEGER:
     return value.value
-  if isinstance(value, pywidl.FloatValue):
+  if value.type == pywidl.Value.FLOAT:
     return value.value
-  if isinstance(value, pywidl.NullValue):
+  if value.type == pywidl.Value.NULL:
     return "null"
-  if isinstance(value, pywidl.StringValue):
+  if value.type == pywidl.Value.STRING:
     return "\"%s\"" % value.value
   else:
     return "/* unknown value type %s */" % value
