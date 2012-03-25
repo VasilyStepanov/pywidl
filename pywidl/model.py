@@ -1,5 +1,50 @@
 # -*- coding: UTF-8 -*-
 
+# Definition
+#   Inteface
+#   PartialInterface
+#   ImplementsStatement
+#   Typedef
+#   Dictionary
+#   Callback
+#   Enum
+#   Exception
+# InterfaceMember
+#   Attribute
+#   Operation
+#   Const
+#   ExceptionField
+# DictionaryMember
+# ExtendedAttribute
+# ExtendedAttributeValue
+# Argument
+# Type
+#   DOMString
+#   InterfaceType
+#   Sequence
+#   Object
+#   Date
+#   Boolean
+#   Byte
+#   Octet
+#   Float
+#   Double
+#   Array
+#   Void
+#   Any
+#   Short
+#   UnsignedShort
+#   Long
+#   UnsignedLong
+#   LongLong
+#   UnsignedLongLong
+#   UnionType
+# Value
+#   BooleanValue
+#   IntegerValue
+#   FloatValue
+#   StringValue
+
 
 
 class Definition(object):
@@ -114,12 +159,22 @@ class Attribute(InterfaceMember):
 
 
 
-class ExceptionField(InterfaceMember):
+class Operation(InterfaceMember):
 
-  def __init__(self, type=None, **kwargs):
+  def __init__(self, stringifier=None, return_type=None, arguments=[],
+    static=False, getter=False, setter=False, creator=False, deleter=False,
+    legacycaller=False, **kwargs):
 
-    super(ExceptionField, self).__init__(**kwargs)
-    self.type = type
+    super(Operation, self).__init__(**kwargs)
+    self.stringifier = stringifier
+    self.return_type = return_type
+    self.arguments = arguments
+    self.static = static
+    self.getter = getter
+    self.setter = setter
+    self.creator = creator
+    self.deleter = deleter
+    self.legacycaller = legacycaller
 
 
 
@@ -133,219 +188,25 @@ class Const(InterfaceMember):
 
 
 
-class Type(object):
+class ExceptionField(InterfaceMember):
 
-  def __init__(self, name=None, nullable=False, **kwargs):
+  def __init__(self, type=None, **kwargs):
 
-    super(Type, self).__init__(**kwargs)
+    super(ExceptionField, self).__init__(**kwargs)
+    self.type = type
+
+
+
+class DictionaryMember(object):
+
+  def __init__(self, type=None, name=None, default=None,
+    extended_attributes=[], **kwargs):
+
+    super(DictionaryMember, self).__init__(**kwargs)
+    self.type = type
     self.name = name
-    self.nullable = nullable
-
-
-
-class SingleType(Type):
-
-  def __init__(self, **kwargs):
-
-    super(SingleType, self).__init__(**kwargs)
-
-
-
-class PrimitiveType(SingleType):
-
-  def __init__(self, **kwargs):
-
-    super(PrimitiveType, self).__init__(**kwargs)
-
-
-
-class Boolean(PrimitiveType):
-
-  def __init__(self, **kwargs):
-
-    super(Boolean, self).__init__(**kwargs)
-    self.name = "Boolean"
-
-
-
-class Byte(PrimitiveType):
-
-  def __init__(self, **kwargs):
-
-    super(Byte, self).__init__(**kwargs)
-    self.name = "Byte"
-
-
-
-class Octet(PrimitiveType):
-
-  def __init__(self, **kwargs):
-
-    super(Octet, self).__init__(**kwargs)
-    self.name = "Octet"
-
-
-
-class Float(PrimitiveType):
-
-  def __init__(self, **kwargs):
-
-    super(Float, self).__init__(**kwargs)
-    self.name = "Float"
-
-
-
-class Double(PrimitiveType):
-
-  def __init__(self, **kwargs):
-
-    super(Double, self).__init__(**kwargs)
-    self.name = "Double"
-
-
-
-class IntegerType(PrimitiveType):
-
-  def __init__(self, **kwargs):
-
-    super(IntegerType, self).__init__(**kwargs)
-
-
-
-class Short(IntegerType):
-
-  def __init__(self, **kwargs):
-
-    super(Short, self).__init__(**kwargs)
-    self.name = "Short"
-
-
-
-class UnsignedShort(IntegerType):
-
-  def __init__(self, **kwargs):
-
-    super(UnsignedShort, self).__init__(**kwargs)
-    self.name = "UnsignedShort"
-
-
-
-class Long(IntegerType):
-
-  def __init__(self, **kwargs):
-
-    super(Long, self).__init__(**kwargs)
-    self.name = "Long"
-
-
-
-class UnsignedLong(IntegerType):
-
-  def __init__(self, **kwargs):
-
-    super(UnsignedLong, self).__init__(**kwargs)
-    self.name = "UnsignedLong"
-
-
-
-class LongLong(IntegerType):
-
-  def __init__(self, **kwargs):
-
-    super(LongLong, self).__init__(**kwargs)
-    self.name = "LongLong"
-
-
-
-class UnsignedLongLong(IntegerType):
-
-  def __init__(self, **kwargs):
-
-    super(UnsignedLongLong, self).__init__(**kwargs)
-    self.name = "UnsignedLongLong"
-
-
-
-class DOMString(SingleType):
-
-  def __init__(self, **kwargs):
-
-    super(DOMString, self).__init__(**kwargs)
-    self.name = "DOMString"
-
-
-
-class InterfaceType(SingleType):
-
-  def __init__(self, **kwargs):
-
-    super(InterfaceType, self).__init__(**kwargs)
-
-
-
-class Sequence(SingleType):
-
-  def __init__(self, t=None, **kwargs):
-
-    super(Sequence, self).__init__(**kwargs)
-    self.name = "Sequence"
-    self.t = t
-
-
-
-class Object(SingleType):
-
-  def __init__(self, **kwargs):
-
-    super(Object, self).__init__(**kwargs)
-    self.name = "Object"
-
-
-
-class Date(SingleType):
-
-  def __init__(self, **kwargs):
-
-    super(Date, self).__init__(**kwargs)
-    self.name = "Date"
-
-
-
-class Array(Type):
-
-  def __init__(self, t=None, **kwargs):
-
-    super(Array, self).__init__(**kwargs)
-    self.name = "Array"
-    self.t = t
-
-
-
-class Void(Type):
-  pass
-
-
-
-class UnionType(Type):
-
-  def __init__(self, t=[], **kwargs):
-
-    super(UnionType, self).__init__(**kwargs)
-    self.name = property(self._getName)
-    self.t = t
-
-
-  def _getName(self):
-    return " Or ".join([t.name for t in self.t])
-
-
-
-class Any(Type):
-
-  def __init__(self, **kwargs):
-
-    super(Any, self).__init__(**kwargs)
-    self.name = "Any"
+    self.default = default
+    self.extended_attributes = extended_attributes
 
 
 
@@ -384,25 +245,195 @@ class Argument(object):
 
 
 
-class Operation(object):
+class Type(object):
 
-  def __init__(self, stringifier=None, name=None, return_type=None,
-    arguments=[], extended_attributes=[], static=False, getter=False,
-    setter=False, creator=False, deleter=False, legacycaller=False,
-    **kwargs):
+  def __init__(self, name=None, nullable=False, **kwargs):
 
-    super(Operation, self).__init__(**kwargs)
-    self.stringifier = stringifier
+    super(Type, self).__init__(**kwargs)
     self.name = name
-    self.return_type = return_type
-    self.arguments = arguments
-    self.extended_attributes = extended_attributes
-    self.static = static
-    self.getter = getter
-    self.setter = setter
-    self.creator = creator
-    self.deleter = deleter
-    self.legacycaller = legacycaller
+    self.nullable = nullable
+
+
+
+class DOMString(Type):
+
+  def __init__(self, **kwargs):
+
+    super(DOMString, self).__init__(**kwargs)
+    self.name = "DOMString"
+
+
+
+class InterfaceType(Type):
+
+  def __init__(self, **kwargs):
+
+    super(InterfaceType, self).__init__(**kwargs)
+
+
+
+class Sequence(Type):
+
+  def __init__(self, t=None, **kwargs):
+
+    super(Sequence, self).__init__(**kwargs)
+    self.name = "Sequence"
+    self.t = t
+
+
+
+class Object(Type):
+
+  def __init__(self, **kwargs):
+
+    super(Object, self).__init__(**kwargs)
+    self.name = "Object"
+
+
+
+class Date(Type):
+
+  def __init__(self, **kwargs):
+
+    super(Date, self).__init__(**kwargs)
+    self.name = "Date"
+
+
+
+class Boolean(Type):
+
+  def __init__(self, **kwargs):
+
+    super(Boolean, self).__init__(**kwargs)
+    self.name = "Boolean"
+
+
+
+class Byte(Type):
+
+  def __init__(self, **kwargs):
+
+    super(Byte, self).__init__(**kwargs)
+    self.name = "Byte"
+
+
+
+class Octet(Type):
+
+  def __init__(self, **kwargs):
+
+    super(Octet, self).__init__(**kwargs)
+    self.name = "Octet"
+
+
+
+class Float(Type):
+
+  def __init__(self, **kwargs):
+
+    super(Float, self).__init__(**kwargs)
+    self.name = "Float"
+
+
+
+class Double(Type):
+
+  def __init__(self, **kwargs):
+
+    super(Double, self).__init__(**kwargs)
+    self.name = "Double"
+
+
+
+class Array(Type):
+
+  def __init__(self, t=None, **kwargs):
+
+    super(Array, self).__init__(**kwargs)
+    self.name = "Array"
+    self.t = t
+
+
+
+class Void(Type):
+  pass
+
+
+
+class Any(Type):
+
+  def __init__(self, **kwargs):
+
+    super(Any, self).__init__(**kwargs)
+    self.name = "Any"
+
+
+
+class Short(Type):
+
+  def __init__(self, **kwargs):
+
+    super(Short, self).__init__(**kwargs)
+    self.name = "Short"
+
+
+
+class UnsignedShort(Type):
+
+  def __init__(self, **kwargs):
+
+    super(UnsignedShort, self).__init__(**kwargs)
+    self.name = "UnsignedShort"
+
+
+
+class Long(Type):
+
+  def __init__(self, **kwargs):
+
+    super(Long, self).__init__(**kwargs)
+    self.name = "Long"
+
+
+
+class UnsignedLong(Type):
+
+  def __init__(self, **kwargs):
+
+    super(UnsignedLong, self).__init__(**kwargs)
+    self.name = "UnsignedLong"
+
+
+
+class LongLong(Type):
+
+  def __init__(self, **kwargs):
+
+    super(LongLong, self).__init__(**kwargs)
+    self.name = "LongLong"
+
+
+
+class UnsignedLongLong(Type):
+
+  def __init__(self, **kwargs):
+
+    super(UnsignedLongLong, self).__init__(**kwargs)
+    self.name = "UnsignedLongLong"
+
+
+
+class UnionType(Type):
+
+  def __init__(self, t=[], **kwargs):
+
+    super(UnionType, self).__init__(**kwargs)
+    self.name = property(self._getName)
+    self.t = t
+
+
+  def _getName(self):
+    return " Or ".join([t.name for t in self.t])
 
 
 
@@ -437,16 +468,3 @@ class NullValue(Value):
 
 class StringValue(Value):
   pass
-
-
-
-class DictionaryMember(object):
-
-  def __init__(self, type=None, name=None, default=None,
-    extended_attributes=[], **kwargs):
-
-    super(DictionaryMember, self).__init__(**kwargs)
-    self.type = type
-    self.name = name
-    self.default = default
-    self.extended_attributes = extended_attributes
