@@ -509,14 +509,15 @@ def p_Argument(p):
 # 40
 def p_OptionalOrRequiredArgument_optional(p):
   """OptionalOrRequiredArgument : optional Type IDENTIFIER Default"""
-  p[0] = model.Argument(type=p[2], name=p[3], optional=True, default=p[4])
+  p[0] = model.OperationArgument(
+    type=p[2], name=p[3], optional=True, default=p[4])
 
 
 
 # 40
 def p_OptionalOrRequiredArgument(p):
   """OptionalOrRequiredArgument : Type Ellipsis IDENTIFIER"""
-  p[0] = model.Argument(type=p[1], ellipsis=p[2], name=p[3])
+  p[0] = model.OperationArgument(type=p[1], ellipsis=p[2], name=p[3])
 
 
 

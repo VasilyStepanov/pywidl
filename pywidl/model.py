@@ -14,10 +14,10 @@
 #   Operation
 #   Const
 #   ExceptionField
+# OperationArgument
 # DictionaryMember
 # ExtendedAttribute
 # ExtendedAttributeValue
-# Argument
 # Type
 #   SimpleType
 #   InterfaceType
@@ -178,6 +178,21 @@ class ExceptionField(InterfaceMember):
 
 
 
+class OperationArgument(object):
+
+  def __init__(self, type=None, name=None, optional=False, default=None,
+    ellipsis=False, extended_attributes=[], **kwargs):
+
+    super(OperationArgument, self).__init__(**kwargs)
+    self.type = type
+    self.name = name
+    self.optional = optional
+    self.default = default
+    self.ellipsis = ellipsis
+    self.extended_attributes = extended_attributes
+
+
+
 class DictionaryMember(object):
 
   def __init__(self, type=None, name=None, default=None,
@@ -208,21 +223,6 @@ class ExtendedAttributeValue(object):
     super(ExtendedAttributeValue, self).__init__(**kwargs)
     self.name = name
     self.arguments = arguments
-
-
-
-class Argument(object):
-
-  def __init__(self, type=None, name=None, optional=False, default=None,
-    ellipsis=False, extended_attributes=[], **kwargs):
-
-    super(Argument, self).__init__(**kwargs)
-    self.type = type
-    self.name = name
-    self.optional = optional
-    self.default = default
-    self.ellipsis = ellipsis
-    self.extended_attributes = extended_attributes
 
 
 
