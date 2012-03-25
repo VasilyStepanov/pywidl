@@ -30,9 +30,9 @@
 
 class Definition(object):
 
-  def __init__(self, name=None, extended_attributes=[], **kwargs):
+  def __init__(self, name=None, extended_attributes=[]):
 
-    super(Definition, self).__init__(**kwargs)
+    super(Definition, self).__init__()
     self.name = name
     self.extended_attributes = extended_attributes
 
@@ -119,9 +119,9 @@ class Exception(Definition):
 
 class InterfaceMember(object):
 
-  def __init__(self, name=None, extended_attributes=[], **kwargs):
+  def __init__(self, name=None, extended_attributes=[]):
 
-    super(InterfaceMember, self).__init__(**kwargs)
+    super(InterfaceMember, self).__init__()
     self.name = name
     self.extended_attributes = extended_attributes
 
@@ -181,9 +181,9 @@ class ExceptionField(InterfaceMember):
 class OperationArgument(object):
 
   def __init__(self, type=None, name=None, optional=False, default=None,
-    ellipsis=False, extended_attributes=[], **kwargs):
+    ellipsis=False, extended_attributes=[]):
 
-    super(OperationArgument, self).__init__(**kwargs)
+    super(OperationArgument, self).__init__()
     self.type = type
     self.name = name
     self.optional = optional
@@ -196,9 +196,9 @@ class OperationArgument(object):
 class DictionaryMember(object):
 
   def __init__(self, type=None, name=None, default=None,
-    extended_attributes=[], **kwargs):
+    extended_attributes=[]):
 
-    super(DictionaryMember, self).__init__(**kwargs)
+    super(DictionaryMember, self).__init__()
     self.type = type
     self.name = name
     self.default = default
@@ -208,9 +208,9 @@ class DictionaryMember(object):
 
 class ExtendedAttribute(object):
 
-  def __init__(self, name=None, value=None, **kwargs):
+  def __init__(self, name=None, value=None):
 
-    super(ExtendedAttribute, self).__init__(**kwargs)
+    super(ExtendedAttribute, self).__init__()
     self.name = name
     self.value = value
 
@@ -218,9 +218,9 @@ class ExtendedAttribute(object):
 
 class ExtendedAttributeValue(object):
 
-  def __init__(self, name=None, arguments=[], **kwargs):
+  def __init__(self, name=None, arguments=[]):
 
-    super(ExtendedAttributeValue, self).__init__(**kwargs)
+    super(ExtendedAttributeValue, self).__init__()
     self.name = name
     self.arguments = arguments
 
@@ -228,9 +228,9 @@ class ExtendedAttributeValue(object):
 
 class Type(object):
 
-  def __init__(self, nullable=False, **kwargs):
+  def __init__(self, nullable=False):
 
-    super(Type, self).__init__(**kwargs)
+    super(Type, self).__init__()
     self.nullable = nullable
 
 
@@ -303,8 +303,8 @@ class Value(object):
   NULL = 3
   STRING = 4
 
-  def __init__(self, type=None, value=None, **kwargs):
+  def __init__(self, type=None, value=None):
 
-    super(Value, self).__init__(**kwargs)
+    super(Value, self).__init__()
     self.type = type
     self.value = value
