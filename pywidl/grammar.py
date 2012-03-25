@@ -712,7 +712,8 @@ def p_SingleType(p):
 # 53
 def p_SingleType_any(p):
   """SingleType : any TypeSuffixStartingWithArray"""
-  p[0] = helper.unwrapTypeSuffix(model.Any(), p[2])
+  p[0] = helper.unwrapTypeSuffix(model.SimpleType(
+    model.SimpleType.ANY), p[2])
 
 
 
@@ -742,7 +743,8 @@ def p_UnionMemberType_unionType(p):
 # 55
 def p_UnionMemberType_anyType(p):
   """UnionMemberType : any "[" "]" TypeSuffix"""
-  p[0] = helper.unwrapTypeSuffix(model.Array(t=model.Any()), p[4])
+  p[0] = helper.unwrapTypeSuffix(model.Array(t=model.SimpleType(
+    type=model.SimpleType.ANY)), p[4])
 
 
 
@@ -770,7 +772,8 @@ def p_NonAnyType_primitiveType(p):
 # 57
 def p_NonAnyType_domString(p):
   """NonAnyType : DOMString TypeSuffix"""
-  p[0] = helper.unwrapTypeSuffix(model.DOMString(), p[2])
+  p[0] = helper.unwrapTypeSuffix(model.SimpleType(
+    type=model.SimpleType.DOMSTRING), p[2])
 
 
 
@@ -791,14 +794,16 @@ def p_NonAnyType_sequence(p):
 # 57
 def p_NonAnyType_object(p):
   """NonAnyType : object TypeSuffix"""
-  p[0] = helper.unwrapTypeSuffix(model.Object(), p[2])
+  p[0] = helper.unwrapTypeSuffix(model.SimpleType(
+    type=model.SimpleType.OBJECT), p[2])
 
 
 
 # 57
 def p_NonAnyType(p):
   """NonAnyType : Date TypeSuffix"""
-  p[0] = helper.unwrapTypeSuffix(model.Date(), p[2])
+  p[0] = helper.unwrapTypeSuffix(model.SimpleType(
+    type=model.SimpleType.DATE), p[2])
 
 
 
@@ -820,35 +825,35 @@ def p_PrimitiveType_integer(p):
 # 59
 def p_PrimitiveType_boolean(p):
   """PrimitiveType : boolean"""
-  p[0] = model.Boolean()
+  p[0] = model.SimpleType(type=model.SimpleType.BOOLEAN)
 
 
 
 # 59
 def p_PrimitiveType_byte(p):
   """PrimitiveType : byte"""
-  p[0] = model.Byte()
+  p[0] = model.SimpleType(type=model.SimpleType.BYTE)
 
 
 
 # 59
 def p_PrimitiveType_octet(p):
   """PrimitiveType : octet"""
-  p[0] = model.Octet()
+  p[0] = model.SimpleType(type=model.SimpleType.OCTET)
 
 
 
 # 59
 def p_PrimitiveType_float(p):
   """PrimitiveType : float"""
-  p[0] = model.Float()
+  p[0] = model.SimpleType(type=model.SimpleType.FLOAT)
 
 
 
 # 59
 def p_PrimitiveType_double(p):
   """PrimitiveType : double"""
-  p[0] = model.Double()
+  p[0] = model.SimpleType(type=model.SimpleType.DOUBLE)
 
 
 
@@ -957,7 +962,7 @@ def p_ReturnType(p):
 # 66
 def p_ReturnType_void(p):
   """ReturnType : void"""
-  p[0] = model.Void()
+  p[0] = model.SimpleType(model.SimpleType.VOID)
 
 
 

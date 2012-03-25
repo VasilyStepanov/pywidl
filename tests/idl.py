@@ -4,47 +4,55 @@ import pywidl
 
 
 
+def emitSimpleType(typedef):
+  if typedef.type == pywidl.SimpleType.DOMSTRING:
+    return "DOMString"
+  elif typedef.type == pywidl.SimpleType.OBJECT:
+    return "object"
+  elif typedef.type == pywidl.SimpleType.DATE:
+    return "Date"
+  elif typedef.type == pywidl.SimpleType.BOOLEAN:
+    return "boolean"
+  elif typedef.type == pywidl.SimpleType.BYTE:
+    return "byte"
+  elif typedef.type == pywidl.SimpleType.OCTET:
+    return "octet"
+  elif typedef.type == pywidl.SimpleType.FLOAT:
+    return "float"
+  elif typedef.type == pywidl.SimpleType.DOUBLE:
+    return "double"
+  elif typedef.type == pywidl.SimpleType.VOID:
+    return "void"
+  elif typedef.type == pywidl.SimpleType.ANY:
+    return "any"
+  elif typedef.type == pywidl.SimpleType.SHORT:
+    return "short"
+  elif typedef.type == pywidl.SimpleType.UNSIGNED_SHORT:
+    return "unsigned short"
+  elif typedef.type == pywidl.SimpleType.LONG:
+    return "long"
+  elif typedef.type == pywidl.SimpleType.UNSIGNED_LONG:
+    return "unsigned long"
+  elif typedef.type == pywidl.SimpleType.LONG_LONG:
+    return "long long"
+  elif typedef.type == pywidl.SimpleType.UNSIGNED_LONG_LONG:
+    return "unsigned long long"
+
+  return "/* unknown simple type %s */" % typedef.type
+
+
+
 def emitType(typedef):
   ret = None
 
-  if isinstance(typedef, pywidl.Short):
-    ret = "short"
-  elif isinstance(typedef, pywidl.UnsignedShort):
-    ret = "unsigned short"
-  elif isinstance(typedef, pywidl.Long):
-    ret = "long"
-  elif isinstance(typedef, pywidl.UnsignedLong):
-    ret = "unsigned long"
-  elif isinstance(typedef, pywidl.LongLong):
-    ret = "long long"
-  elif isinstance(typedef, pywidl.UnsignedLongLong):
-    ret = "unsigned long long"
-  elif isinstance(typedef, pywidl.Boolean):
-    ret = "boolean"
-  elif isinstance(typedef, pywidl.Byte):
-    ret = "byte"
-  elif isinstance(typedef, pywidl.Octet):
-    ret = "octet"
-  elif isinstance(typedef, pywidl.Float):
-    ret = "float"
-  elif isinstance(typedef, pywidl.Double):
-    ret = "double"
-  elif isinstance(typedef, pywidl.DOMString):
-    ret = "DOMString"
+  if isinstance(typedef, pywidl.SimpleType):
+    ret = emitSimpleType(typedef)
   elif isinstance(typedef, pywidl.InterfaceType):
     ret = typedef.name
   elif isinstance(typedef, pywidl.Sequence):
     ret = "sequence<%s>" % emitType(typedef.t)
-  elif isinstance(typedef, pywidl.Object):
-    ret = "object"
-  elif isinstance(typedef, pywidl.Date):
-    ret = "Date"
-  elif isinstance(typedef, pywidl.Any):
-    ret = "any"
   elif isinstance(typedef, pywidl.Array):
     ret = "%s[]" % emitType(typedef.t)
-  elif isinstance(typedef, pywidl.Void):
-    ret = "void"
   elif isinstance(typedef, pywidl.UnionType):
     ret = "(%s)" % " or ".join([emitType(t) for t in typedef.t])
   else:

@@ -38,11 +38,17 @@ def unwrapTypeSuffix(type, suffix):
 
 def unwrapIntegerType(unsigned, type):
   if type == SHORT:
-    return unsigned and model.UnsignedShort() or model.Short()
+    if not unsigned:
+      return model.SimpleType(type=model.SimpleType.SHORT)
+    return model.SimpleType(type=model.SimpleType.UNSIGNED_SHORT)
   if type == LONG:
-    return unsigned and model.UnsignedLong() or model.Long()
+    if not unsigned:
+      return model.SimpleType(type=model.SimpleType.LONG)
+    return model.SimpleType(type=model.SimpleType.UNSIGNED_LONG)
   if type == LONGLONG:
-    return unsigned and model.UnsignedLongLong() or model.LongLong()
+    if not unsigned:
+      return model.SimpleType(type=model.SimpleType.LONG_LONG)
+    return model.SimpleType(type=model.SimpleType.UNSIGNED_LONG_LONG)
   raise RuntimeError("unknown type: %s" % type)
 
 
