@@ -352,8 +352,9 @@ def renderDefinition(out, definition):
 
 
 
-def render(definitions=[], source=None, output=None,
-  template=None, template_type=None, **kwargs):
+def render(definitions=[], source=None, output=None, template=None,
+  template_type=None, **kwargs):
+
   with open(output, 'w') as out:
     print >>out, "// source: %s" % source
     print >>out, "// output: %s" % output
