@@ -8,6 +8,7 @@ AC_DEFUN([AC_CHECK_PYWIDL], [
   if test "$PYWIDL" = "no" ; then
     echo "*** The pywidl script could not be found. Make sure it is"
     echo "*** in your path, and is properly installed."
+    echo "*** Or see https://github.com/VasilyStepanov/pywidl"
   else
     PYWIDL_VERSION_STRING=`$PYWIDL --version`
     PYWIDL_VERSION=`expr match "$PYWIDL_VERSION_STRING" 'pywidl \\(.*\\)'`
