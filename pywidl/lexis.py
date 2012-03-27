@@ -92,8 +92,8 @@ def t_STRING(t):
 
 
 
-def t_block_comment(t):
-  r"/\*.*?\*/"
+def t_ignore_block_comment(t):
+  r"\/\*[^*]*\*+([^/*][^*]*\*+)*\/"
   t.lexer.lineno += t.value.count('\n')
 
 

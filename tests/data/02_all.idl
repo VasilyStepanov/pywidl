@@ -1,3 +1,8 @@
+// comment line
+/*
+  comment block
+*/
+
 interface Type {
   attribute short _short;
   attribute unsigned short _ushort;
