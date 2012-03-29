@@ -86,20 +86,26 @@ def appArgs():
   args = {}
   for i in range(1, len(sys.argv)):
     arg = sys.argv[i]
-    if arg == "-v" or arg == "--version":
+    if arg == "--version" or arg == "-v":
       key = "version"
       value = None
-    elif arg == "-m" or arg == "--mako":
+    elif arg == "--mako" or arg == "-m":
       key = "template_type"
       value = App.MAKO_TEMPLATE
-    elif arg == "-n" or arg == "--native":
+    elif arg == "--native" or arg == "-n":
       key = "template_type"
       value = App.NATIVE_TEMPLATE
-    elif arg == "-o" or arg == "--output" and i < len(sys.argv) - 1:
+    elif arg.startswith("--output="):
+      key = "output"
+      value = arg.split('=', 1)[1]
+    elif arg == "-o" and i < len(sys.argv) - 1:
       i += 1
       key = "output"
       value = sys.argv[i]
-    elif arg == "-t" or arg == "--template" and i < len(sys.argv) - 1:
+    elif arg.startswith("--template="):
+      key = "template"
+      value = arg.split('=', 1)[1]
+    elif arg == "-t" and i < len(sys.argv) - 1:
       i += 1
       key = "template"
       value = sys.argv[i]
@@ -126,7 +132,7 @@ def main():
   if source is None or output is None \
   or template is None or template_type is None:
     printUsage()
-    return
+    exit(1)
 
   app = App(source, output, template, template_type)
   return app.run()
