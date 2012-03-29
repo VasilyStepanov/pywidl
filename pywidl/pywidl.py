@@ -23,6 +23,7 @@ def printUsage():
 """
 
 
+
 def printVersion():
   print "%s %s" % (name, version)
 
@@ -81,31 +82,46 @@ class App(object):
 
 
 
-def main():
-  source = None
-  output = None
-  template = None
-  template_type = App.NATIVE_TEMPLATE
-
-  i = 1
-  while i < len(sys.argv):
+def appArgs():
+  args = {}
+  for i in range(1, len(sys.argv)):
     arg = sys.argv[i]
     if arg == "-v" or arg == "--version":
-      printVersion()
-      return
+      key = "version"
+      value = None
     elif arg == "-m" or arg == "--mako":
-      template_type = App.MAKO_TEMPLATE
-    elif arg == "-n" or arg == "--mako":
-      template_type = App.NATIVE_TEMPLATE
-    elif arg == "-o" or arg == "--output":
+      key = "template_type"
+      value = App.MAKO_TEMPLATE
+    elif arg == "-n" or arg == "--native":
+      key = "template_type"
+      value = App.NATIVE_TEMPLATE
+    elif arg == "-o" or arg == "--output" and i < len(sys.argv) - 1:
       i += 1
-      output = sys.argv[i]
-    elif arg == "-t" or arg == "--template":
+      key = "output"
+      value = sys.argv[i]
+    elif arg == "-t" or arg == "--template" and i < len(sys.argv) - 1:
       i += 1
-      template = sys.argv[i]
+      key = "template"
+      value = sys.argv[i]
     else:
-      source = arg
-    i += 1
+      key = "source"
+      value = arg
+    args[key] = value
+  return args
+
+
+
+def main():
+  app_args = appArgs()
+
+  if "version" in app_args:
+    printVersion()
+    return
+
+  source = app_args.get("source", None)
+  output = app_args.get("output", None)
+  template = app_args.get("template", None)
+  template_type = app_args.get("template_type", App.NATIVE_TEMPLATE)
 
   if source is None or output is None \
   or template is None or template_type is None:
