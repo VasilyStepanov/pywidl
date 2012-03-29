@@ -50,14 +50,16 @@ $ cat fragment.idl
 
 $ cat mako.tpl
 
+    // ${foo}
     % for definition in definitions:
     ${definition.name}
     % endfor
 
-$ pywidl -m -o fragment.txt -t mako.tpl fragment.idl
+$ pywidl -m -o fragment.txt -t mako.tpl fragment.idl -- --foo=bar
 
 $ cat fragment.txt
-
+    
+    // bar
     GraphicsException
     Paint
     SolidColor
@@ -67,16 +69,19 @@ $ cat fragment.txt
 $ cat native.py
 
     def render(definitions=[], source=None, output=None,
-      template=None, template_type=None, **kwargs):
+      template=None, template_type=None, foo=None, **kwargs):
 
       with open(output, 'w') as out:
+        print >>out, "// %s" % foo
         for definition in definitions:
           print >>out, definition.name
 
-$ PYTHONPATH=".:$PYTHONPATH" pywidl -n -o fragment.txt -t native fragment.idl
+$ PYTHONPATH=".:$PYTHONPATH"
+pywidl -n -o fragment.txt -t native fragment.idl-- --foo=bar
 
 $ cat fragment.txt
 
+    // bar
     GraphicsException
     Paint
     SolidColor

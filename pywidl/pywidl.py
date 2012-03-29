@@ -12,14 +12,18 @@ version = "0.0"
 
 
 def printUsage():
-  print """USAGE: pywidl <options> source
+  print """USAGE: pywidl <options> source [-- <userargs>]
 
   Options:
     -v, --version
     -n, --native
     -m, --mako
-    -o, --output FILE
-    -t, --template FILE
+    -o, --output=FILE
+    -t, --template=FILE
+
+  User arguments:
+    --foo
+    --foo=bar
 """
 
 
@@ -34,11 +38,15 @@ class App(object):
   MAKO_TEMPLATE = 1
 
 
-  def __init__(self, source, output, template, template_type=NATIVE_TEMPLATE):
+  def __init__(self, source, output, template, template_type=NATIVE_TEMPLATE,
+    user_args=None):
+    if user_args is None: user_args = {}
+
     self._source = source
     self._output = output
     self._template = template
     self._template_type = template_type
+    self._user_args = user_args
 
   
   def _parse(self):
@@ -53,7 +61,8 @@ class App(object):
       source=self._source,
       output=self._output,
       template=self._template,
-      template_type=self._template_type)
+      template_type=self._template_type,
+      **self._user_args)
 
 
   def _emitMako(self, definitions):
@@ -64,7 +73,8 @@ class App(object):
         source=self._source,
         output=self._output,
         template=self._template,
-        template_type=self._template_type))
+        template_type=self._template_type,
+        **self._user_args))
 
   
   def _emit(self, definitions):
@@ -82,11 +92,12 @@ class App(object):
 
 
 
-def appArgs():
+def options(argv):
   args = {}
-  for i in range(1, len(sys.argv)):
-    arg = sys.argv[i]
-    if arg == "--version" or arg == "-v":
+  for i in range(1, len(argv)):
+    arg = argv[i]
+    if arg == "--": break
+    elif arg == "--version" or arg == "-v":
       key = "version"
       value = None
     elif arg == "--mako" or arg == "-m":
@@ -98,17 +109,17 @@ def appArgs():
     elif arg.startswith("--output="):
       key = "output"
       value = arg.split('=', 1)[1]
-    elif arg == "-o" and i < len(sys.argv) - 1:
+    elif arg == "-o" and i < len(argv) - 1:
       i += 1
       key = "output"
-      value = sys.argv[i]
+      value = argv[i]
     elif arg.startswith("--template="):
       key = "template"
       value = arg.split('=', 1)[1]
-    elif arg == "-t" and i < len(sys.argv) - 1:
+    elif arg == "-t" and i < len(argv) - 1:
       i += 1
       key = "template"
-      value = sys.argv[i]
+      value = argv[i]
     else:
       key = "source"
       value = arg
@@ -117,8 +128,34 @@ def appArgs():
 
 
 
+def userArgs(argv):
+  args = {}
+  user_flag = False
+  for i in range(1, len(argv)):
+    arg = argv[i]
+    if not user_flag and arg == "--":
+      user_flag = True
+      continue
+    if not user_flag:
+      continue
+
+    if arg.startswith("--"):
+      arg = arg[2:]
+      keyvalue = arg.split('=', 1)
+      if len(keyvalue) == 2:
+        key, value = keyvalue
+      else:
+        key = keyvalue[0]
+        value = None
+      args[key] = value
+
+  return args
+
+
+
 def main():
-  app_args = appArgs()
+  app_args = options(sys.argv)
+  user_args = userArgs(sys.argv)
 
   if "version" in app_args:
     printVersion()
@@ -134,7 +171,7 @@ def main():
     printUsage()
     exit(1)
 
-  app = App(source, output, template, template_type)
+  app = App(source, output, template, template_type, user_args)
   return app.run()
 
 
