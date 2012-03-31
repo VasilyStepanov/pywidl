@@ -7,8 +7,23 @@ pywidl parses WebIDL code using PLY, builds the interface object model and emits
 whatever code using user's mako templates or even user's native python module.
 
 
+
+Installation
+------------
+
+Installing with pip:
+
+    pip install pywidl
+
+gentoo users may use [odin overlay](https://github.com/KonstantinGrigoriev/odin-overlay):
+
+    emerge pywidl
+
+
+
 WebIDL object model
 -------------------
+
 Defined in pywidl/model.py
 
 Common usage in tests/idl.py
