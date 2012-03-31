@@ -8,7 +8,7 @@ from mako.template import Template
 import sys
 
 name = "pywidl"
-version = "0.1"
+version = "0.2"
 
 
 def printUsage():
