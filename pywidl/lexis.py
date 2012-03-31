@@ -3,6 +3,7 @@
 import ply.lex as lex
 
 import os
+import sys
 
 
 
@@ -99,13 +100,13 @@ def t_ignore_block_comment(t):
 
 
 def t_newline(t):
-  r"\n"
-  t.lexer.lineno += 1
+  r"\n+"
+  t.lexer.lineno += len(t.value)
 
 
 
 def t_error(t):
-  print "Illegal character '%s' at %d" % (t.value[0], t.lexer.lineno)
+  print >>sys.stderr, "Illegal character '%s'" % t.value[0]
   t.lexer.skip(1)
 
 

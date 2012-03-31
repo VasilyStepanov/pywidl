@@ -1004,7 +1004,7 @@ def p_ExtendedAttributeNamedArgList(p):
 
 
 def p_error(p):
-  raise RuntimeError("Syntax error at '%s'" % repr(p))
+  raise RuntimeError("Syntax error at '%s'" % p.value)
 
 
 
