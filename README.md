@@ -30,6 +30,17 @@ Common usage in tests/idl.py
 
 
 
+autoconf users
+---------------
+
+[m4](https://raw.github.com/VasilyStepanov/pywidl/master/m4/pywidl.m4) script
+may be useful for you.
+
+You may find m4 usage example in
+[libcssom](https://github.com/VasilyStepanov/libcssom) project.
+
+
+
 Example usage
 -------------
 
