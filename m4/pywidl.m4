@@ -17,7 +17,7 @@ AC_DEFUN([AC_CHECK_PYWIDL], [
     else
       PYWIDL_EXPECTED_VERSION=$1
     fi
-    AC_MSG_CHECKING(for PyWIdl >= $PYWIDL_EXPECTED_VERSION)
+    AC_MSG_CHECKING(for pywidl >= $PYWIDL_EXPECTED_VERSION)
       PYWIDL_VERSION_MAJOR=`expr match "$PYWIDL_VERSION" '\\([[0-9]]\\+\\)\\.[[0-9]]\\+'`
       PYWIDL_VERSION_MINOR=`expr match "$PYWIDL_VERSION" '[[0-9]]\\+\\.\\([[0-9]]\\+\\)'`
       PYWIDL_EXPECTED_VERSION_MAJOR=`expr match "$PYWIDL_EXPECTED_VERSION" '\\([[0-9]]\\+\\)\\.[[0-9]]\\+'`
@@ -37,7 +37,7 @@ AC_DEFUN([AC_CHECK_PYWIDL], [
       else
         ## If we have a custom action on failure, don't print errors, but
         ## do set a variable so people can do so.
-        ifelse([$3], ,echo "can't find PyWIdl >= $PYWIDL_EXPECTED_VERSION",)
+        ifelse([$3], ,echo "can't find pywidl >= $PYWIDL_EXPECTED_VERSION",)
       fi
 
       AC_SUBST(PYWIDL)
@@ -46,7 +46,7 @@ AC_DEFUN([AC_CHECK_PYWIDL], [
   if test "$succeeded" = "yes"; then
     ifelse([$2], , :, [$2])
   else
-    ifelse([$3], , AC_MSG_ERROR([PyWIdl requirements not met.]), [$3])
+    ifelse([$3], , AC_MSG_ERROR([pywidl requirements not met.]), [$3])
   fi
 ])
 
