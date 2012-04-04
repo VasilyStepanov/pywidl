@@ -110,7 +110,7 @@ $ cat native.py
           print >>out, definition.name
 
 $ PYTHONPATH=".:$PYTHONPATH"
-pywidl -n -o fragment.txt -t native fragment.idl-- --foo=bar
+pywidl -n -o fragment.txt -t native fragment.idl -- --foo=bar
 
 $ cat fragment.txt
 
