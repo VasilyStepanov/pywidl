@@ -8,6 +8,13 @@ whatever code using user's mako templates or even user's native python module.
 
 
 
+Links
+-----
+ + [github](https://github.com/VasilyStepanov/pywidl)
+ + [pypi](http://pypi.python.org/pypi/pywidl)
+
+
+
 Installation
 ------------
 
